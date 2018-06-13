@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin 
+    xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="1.1.2">
+    <name>Selligent Cordova</name>
+    <description>Selligent Cordova</description>
+    <license>MIT</license>
+    <author></author>
+    <keywords>cordova,selligent</keywords>
+    <js-module src="www/plugin.js" name="Selligent">
+        <clobbers target="Selligent"/>
+    </js-module>
+    <js-module src="www/constants.js" name="SelligentConstants">
+        <clobbers target="SelligentConstants"/>
+    </js-module>
+    <js-module src="www/helpers.js" name="SelligentHelpers">
+        <clobbers target="SelligentHelpers"/>
+    </js-module>
+
+    <!-- ANDROID PLATFORM -->
+    <platform name="android">
+        <js-module src="www/android/pluginAndroid.js" name="SelligentAndroid">
+            <merges target="Selligent"/>
+        </js-module>
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="SelligentPlugin">
+                <param name="android-package" value="com.selligent.SelligentPlugin"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <!-- CORDOVA SOURCE FILES -->
+        <source-file src="src/android/com/selligent/SelligentPlugin.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/ClearCacheIntervalValue.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/InAppMessageRefreshType.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/RemoteMessageDisplayType.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/SMSettingsFactory.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/Settings.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/SelligentApplication.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/SMEventFactory.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/EventType.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/Event.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/EventReceiver.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/BroadcastEventType.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/BroadcastDataFactory.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/BroadcastEventDataParser.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/InAppMessageBroadcastEventDataParser.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/GCMTokenBroadcastEventDataParser.java" target-dir="src/com/selligent" />
+        <source-file src="src/android/com/selligent/ButtonBroadcastEventDataParser.java" target-dir="src/com/selligent" />
+        <!-- ADDITIONAL LIBRARIES -->
+        <framework src="src/android/frameworks/selligent-sdk-1.7.3.gradle" custom="true" type="gradleReference" />
+        <lib-file src="src/android/frameworks/selligent-sdk-1.7.3.aar" target="libs/selligent-sdk-1.7.3.aar" />
+    </platform>
+    <platform name="ios">
+        <js-module src="www/ios/pluginIos.js" name="SelligentIos">
+            <merges target="Selligent"/>
+        </js-module>
+        <config-file target="config.xml" parent="/*">
+            <feature name="SelligentPlugin">
+                <param name="ios-package" value="SelligentPlugin"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/SelligentPlugin.h"/>
+        <source-file src="src/ios/SelligentPlugin.m"/>
+        <header-file src="src/ios/AppDelegate+SelligentPlugin.h"/>
+        <source-file src="src/ios/AppDelegate+SelligentPlugin.m"/>
+        <header-file src="src/ios/ClientSettings.h"/>
+        <source-file src="src/ios/ClientSettings.m"/>
+        <header-file src="src/ios/InAppMessageSettings.h"/>
+        <source-file src="src/ios/InAppMessageSettings.m"/>
+        <header-file src="src/ios/EnumMapper.h"/>
+        <source-file src="src/ios/EnumMapper.m"/>
+        <header-file src="src/ios/SelligentLogger.h"/>
+        <source-file src="src/ios/SelligentLogger.m"/>
+        <header-file src="src/ios/SMManagerSetting+ClientSettings.h"/>
+        <source-file src="src/ios/SMManagerSetting+ClientSettings.m"/>
+        <header-file src="src/ios/LogLevel.h"/>
+        <header-file src="src/ios/InAppMessageRefreshType.h"/>
+        <header-file src="src/ios/ClearCacheInterval.h"/>
+        <header-file src="src/ios/ParsableObject.h"/>
+        <header-file src="src/ios/LocationAuthorisationStatus.h"/>
+        <header-file src="src/ios/LocationAuthorisationType.h"/> 
+        <header-file src="src/ios/BackgroundFetchResult.h"/>
+        <header-file src="src/ios/NotificationButtonType.h"/>
+
+        <header-file src="src/ios/Event.h"/> 
+        <source-file src="src/ios/Event.m"/> 
+        <header-file src="src/ios/Event+SMEvent.h"/> 
+        <source-file src="src/ios/Event+SMEvent.m"/> 
+
+        <source-file src="src/ios/frameworks/libSelligentMobile1.7.3.a" framework="true" />
+        <header-file src="src/ios/frameworks/include/SMBaseMessage.h" />
+        <header-file src="src/ios/frameworks/include/SMBlock.h" />
+        <header-file src="src/ios/frameworks/include/SMClearCache.h" />
+        <header-file src="src/ios/frameworks/include/SMContentAlignment.h" />
+        <header-file src="src/ios/frameworks/include/SMDeviceInfos.h" />
+        <header-file src="src/ios/frameworks/include/SMDisplayMode.h" />
+        <header-file src="src/ios/frameworks/include/SMEvent.h" />
+        <header-file src="src/ios/frameworks/include/SMEventUser.h" />
+        <header-file src="src/ios/frameworks/include/SMEventUserLogin.h" />
+        <header-file src="src/ios/frameworks/include/SMEventUserLogout.h" />
+        <header-file src="src/ios/frameworks/include/SMEventUserRegistration.h" />
+        <header-file src="src/ios/frameworks/include/SMEventUserUnregistration.h" />
+        <header-file src="src/ios/frameworks/include/SMFailure.h" />
+        <header-file src="src/ios/frameworks/include/SMHelper.h" />
+        <header-file src="src/ios/frameworks/include/SMInAppContentHTMLViewController.h" />
+        <header-file src="src/ios/frameworks/include/SMInAppContentImageViewController.h" />
+        <header-file src="src/ios/frameworks/include/SMInAppContentMessage.h" />
+        <header-file src="src/ios/frameworks/include/SMInAppContentStyleOptions.h" />
+        <header-file src="src/ios/frameworks/include/SMInAppContentType.h" />
+        <header-file src="src/ios/frameworks/include/SMInAppContentURLViewController.h" />
+        <header-file src="src/ios/frameworks/include/SMInAppContentViewController.h" />
+        <header-file src="src/ios/frameworks/include/SMInAppRefreshType.h" />
+        <header-file src="src/ios/frameworks/include/SMLink.h" />
+        <header-file src="src/ios/frameworks/include/SMLocationAuthorisationType.h" />
+        <header-file src="src/ios/frameworks/include/SMLog.h" />
+        <header-file src="src/ios/frameworks/include/SMManager.h" />
+        <header-file src="src/ios/frameworks/include/SMManager+DataTransaction.h" />
+        <header-file src="src/ios/frameworks/include/SMManager+InAppContent.h" />
+        <header-file src="src/ios/frameworks/include/SMManager+InAppMessage.h" />
+        <header-file src="src/ios/frameworks/include/SMManager+Location.h" />
+        <header-file src="src/ios/frameworks/include/SMManager+Log.h" />
+        <header-file src="src/ios/frameworks/include/SMManager+RemoteNotification.h" />
+        <header-file src="src/ios/frameworks/include/SMManager+SilentPush.h" />
+        <header-file src="src/ios/frameworks/include/SMManager+SMEvent.h" />
+        <header-file src="src/ios/frameworks/include/SMManager+StyleOptions.h" />
+        <header-file src="src/ios/frameworks/include/SMManager+UserNotification.h" />
+        <header-file src="src/ios/frameworks/include/SMManagerHelper.h" />
+        <header-file src="src/ios/frameworks/include/SMManagerSetting.h" />
+        <header-file src="src/ios/frameworks/include/SMManagerSettingIAC.h" />
+        <header-file src="src/ios/frameworks/include/SMManagerSettingIAM.h" />
+        <header-file src="src/ios/frameworks/include/SMMessage.h" />
+        <header-file src="src/ios/frameworks/include/SMNotificationButtonData.h" />
+        <header-file src="src/ios/frameworks/include/SMNotificationButtonType.h" />
+        <header-file src="src/ios/frameworks/include/SMNSNotification.h" />
+        <header-file src="src/ios/frameworks/include/SMSuccess.h" />
+
+        <framework src="PlotPlugin" type="podspec" spec="2.1.0" />
+    </platform>
+    <hook type="after_plugin_add" src="hooks/after_plugin_add.js" />
+    <hook type="before_plugin_uninstall" src="hooks/before_plugin_uninstall.js" />
+    <hook type="before_build" src="hooks/before_build.js" />
+</plugin>

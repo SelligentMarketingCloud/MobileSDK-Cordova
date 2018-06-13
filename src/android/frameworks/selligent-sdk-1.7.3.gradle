@@ -1,0 +1,16 @@
+repositories {
+    flatDir{
+          dirs 'libs'
+    }        
+}
+
+dependencies {
+    implementation (name:'selligent-sdk-1.7.3', ext:'aar')
+}
+
+android {
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+}

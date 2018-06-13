@@ -1,0 +1,16 @@
+<plugin 
+    xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+    xmlns:android="http://schemas.android.com/apk/res/android" id="selligent-cordova-tests" version="0.0.1">
+    <name>Selligent Cordova Tests</name>
+    <license>MIT</license>
+    <js-module src="tests.js" name="tests"></js-module>
+    <js-module src="helperTests.js" name="helpers.tests"></js-module>
+    <platform name="ios">
+        <js-module src="ios/testsIos.js" name="ios.tests">
+        </js-module>
+    </platform>
+    <platform name="android">
+        <js-module src="android/testsAndroid.js" name="android.tests">
+        </js-module>
+    </platform>
+</plugin>

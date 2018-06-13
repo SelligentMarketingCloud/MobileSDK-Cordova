@@ -1,0 +1,14 @@
+{
+    "name": "selligent-cordova-tests",
+    "version": "0.0.1",
+    "description": "Selligent Cordova Tests",
+    "cordova": {
+        "id": "selligent-cordova-tests",
+        "platforms": []
+    },
+    "keywords": [
+        "ecosystem:cordova"
+    ],
+    "author": "",
+    "license": "MIT"
+}

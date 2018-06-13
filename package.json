@@ -1,0 +1,20 @@
+{
+  "name": "@selligent-marketing-cloud/selligent-cordova",
+  "version": "1.0.0",
+  "description": "Selligent Cordova",
+  "cordova": {
+    "id": "selligent-cordova",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "cordova",
+    "selligent",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "license": "MIT"
+}
