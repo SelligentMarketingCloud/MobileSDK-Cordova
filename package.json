@@ -1,7 +1,7 @@
 {
   "name": "@selligent-marketing-cloud/selligent-cordova",
   "version": "1.0.0",
-  "description": "Selligent Cordova",
+  "description": "Cordova bridge for Selligent SDK",
   "cordova": {
     "id": "selligent-cordova",
     "platforms": [
@@ -9,6 +9,14 @@
       "ios"
     ]
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SelligentMarketingCloud/MobileSDK-Cordova.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SelligentMarketingCloud/MobileSDK-Cordova/issues"
+  },
+  "homepage": "https://github.com/SelligentMarketingCloud/MobileSDK-Cordova#readme",
   "keywords": [
     "cordova",
     "selligent",

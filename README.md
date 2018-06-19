@@ -54,8 +54,7 @@ For geolocation services, follow section 6.5 **Geolocation**, of the **IOS - Usi
 ## Using the API
 
 1. First, bootstrap the plugin
-2. 
-Create a **selligent.json** file (name is case sensitive) in the `www/assets` folder (create the assets folder if it's not there) using the following structure:
+2. Create a **selligent.json** file (name is case sensitive) in the `www/assets` folder (create the assets folder if it's not there) using the following structure:
 
 ```json
 {
@@ -68,7 +67,7 @@ Create a **selligent.json** file (name is case sensitive) in the `www/assets` fo
 
 For a detailed overview of the settings see [Selligent.reloadSettings(successCallback, errorCallback, settings)](#selligentreloadsettingssuccesscallback--errorcallback--settings).
 
-1. Add a button for testing purposes
+3. Add a button for testing purposes
 
 * For Cordova add the following in the `www/index.html` file:
 
@@ -96,7 +95,7 @@ For a detailed overview of the settings see [Selligent.reloadSettings(successCal
   </ion-content>
   ```
 
-2. Bind a callback to the button created above
+4. Bind a callback to the button created above
 
 * For Cordova add the following in your `www/js/index.js` file:
 
@@ -136,7 +135,7 @@ For a detailed overview of the settings see [Selligent.reloadSettings(successCal
   }
   ```
 
-3. Build the iOS and Android project
+5. Build the iOS and Android project
 
 * For Cordova:
   * `cordova build ios`
@@ -146,7 +145,7 @@ For a detailed overview of the settings see [Selligent.reloadSettings(successCal
   * `ionic cordova build ios`
   * `ionic cordova build android`
 
-4. Run the project and press the **Get Version** button, you should see a popup showing the currently installed Selligent SDK version.
+6. Run the project and press the **Get Version** button, you should see a popup showing the currently installed Selligent SDK version.
 
 ## API Reference
 
