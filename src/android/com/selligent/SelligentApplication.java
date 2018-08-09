@@ -2,7 +2,6 @@ package com.selligent;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.selligent.sdk.SMManager;
@@ -16,12 +15,6 @@ import java.io.InputStream;
 
 public class SelligentApplication extends Application {
     static final String TAG = "SM_CORDOVA_SDK";
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
-    }
 
     @Override
     public void onCreate() {
