@@ -7,7 +7,7 @@ import com.selligent.sdk.SMManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class GCMTokenBroadcastEventDataParser implements BroadcastEventDataParser {
+class GCMTokenBroadcastEventDataParser implements BroadcastEventDataParser {
     @Override
     public JSONObject parse(Intent intent) throws JSONException {
         final JSONObject resultingJSONObject = new JSONObject();

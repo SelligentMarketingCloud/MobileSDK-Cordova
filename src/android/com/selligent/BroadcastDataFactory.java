@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BroadcastDataFactory {
+class BroadcastDataFactory {
 
     private static Map<String, BroadcastEventDataParser> broadcastDataParserMap = new HashMap<String, BroadcastEventDataParser>() {{
         put(SMManager.BROADCAST_EVENT_RECEIVED_IN_APP_MESSAGE, new InAppMessageBroadcastEventDataParser());

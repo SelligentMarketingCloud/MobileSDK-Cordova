@@ -4,7 +4,7 @@
 
 
 module.exports = {
-    /** 
+    /**
      * @description
      * Defines the interval value to clear the cache.
      */
@@ -25,24 +25,21 @@ module.exports = {
             DAY: 3,
         }
     },
-    /** 
+    /**
      * @description
      * Defines how often the SDK must retrieve the in-app messages.
      */
     InAppMessageRefreshType: {
         /** Refresh in-app messages none */
         NONE: 10,
+        /** Refresh in-app messages minutely */
+        MINUTE: 11,
         /** Refresh in-app messages hourly */
         HOUR: 12,
         /** Refresh in-app messages daily */
         DAY: 13,
-        /** Android specific values */
-        Android: {
-            /** Refresh in-app messages minutely, only available on Android */
-            MINUTE: 11,
-        }
     },
-    /** 
+    /**
      * @description
      * Defines if and how remote messages can be displayed on Android.
      */

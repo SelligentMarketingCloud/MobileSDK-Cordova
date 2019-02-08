@@ -8,7 +8,7 @@ import com.selligent.sdk.SMNotificationButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ButtonBroadcastEventDataParser implements BroadcastEventDataParser {
+class ButtonBroadcastEventDataParser implements BroadcastEventDataParser {
     @Override
     public JSONObject parse(Intent intent) throws JSONException {
         final JSONObject resultingJSONObject = new JSONObject();

@@ -9,7 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class InAppMessageBroadcastEventDataParser implements BroadcastEventDataParser {
+class InAppMessageBroadcastEventDataParser implements BroadcastEventDataParser {
     @Override
     public JSONObject parse(Intent intent) throws JSONException {
         final JSONObject resultingJSONObject = new JSONObject();

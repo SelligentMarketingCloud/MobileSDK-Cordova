@@ -1,3 +1,4 @@
+
 var argscheck = require('cordova/argscheck');
 var cordova = require('cordova');
 var SelligentConstants = require('./SelligentConstants');

@@ -2,7 +2,7 @@ package com.selligent;
 
 import com.selligent.sdk.SMManager;
 
-public enum BroadcastEventType {
+enum BroadcastEventType {
     ButtonClicked("ButtonClicked", SMManager.BROADCAST_EVENT_BUTTON_CLICKED),
     ReceivedInAppMessage("ReceivedInAppMessage", SMManager.BROADCAST_EVENT_RECEIVED_IN_APP_MESSAGE),
     WillDisplayNotification("WillDisplayNotification", SMManager.BROADCAST_EVENT_WILL_DISPLAY_NOTIFICATION),
