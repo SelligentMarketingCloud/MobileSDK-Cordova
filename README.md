@@ -45,6 +45,17 @@ Execute the following command: `ionic cordova plugin add @selligent-marketing-cl
                android:name="com.selligent.SelligentApplication">
   ```
 
+#### Change default push notification icons
+
+Add the following properties to the `selligent.json` file:
+
+```
+    "notificationSmallIcon": "ic_notification",
+    "notificationLargeIcon": "ic_notification"
+```
+
+> _Note: only parse the name of the icon, without the path. The icon should reside in the res/drawable folder of the Android project, as explained in [Android's official guide](https://developer.android.com/guide/topics/resources/drawable-resource#BitmapFile)._
+
 ## iOS Specific installation
 
 For remote push notifications, follow section 4 **Configure the APNS (Apple Push Notification Service)**, of the **IOS - Using the SDK** pdf.
@@ -147,7 +158,7 @@ For a detailed overview of the settings see [Selligent.reloadSettings(successCal
 
 6. Run the project and press the **Get Version** button, you should see a popup showing the currently installed Selligent SDK version.
 
-## Deeplinking (iOS only)
+### Deeplinking
 You can catch the deeplinks 2 ways:
 
 1. Native in AppDelegate.m, add the following (example code that logs the URL)
@@ -802,7 +813,7 @@ window.Selligent.areNotificationsEnabled(
 
 Set the small icon of a notification on Android.
 
-The method accepts an `iconName` parameter which is a string containing the name of the small icon.
+The method accepts an `iconName` parameter which is a string containing the name of the small icon. When the application is closed it will default back to the icons specified in `selligent.json`.
 > _Note: only parse the name of the icon, without the path. The icon should reside in the res/drawable folder of the Android project, as explained in [Android's official guide](https://developer.android.com/guide/topics/resources/drawable-resource#BitmapFile)._
 
 ##### setNotificationSmallIcon example
@@ -827,7 +838,7 @@ window.Selligent.setNotificationSmallIcon(
 
 Set the large icon of a notification on Android.
 
-The method accepts an `iconName` parameter which is a string containing the name of the large icon.
+The method accepts an `iconName` parameter which is a string containing the name of the large icon. When the application is closed it will default back to the icons specified in `selligent.json`.
 > _Note: only parse the name of the icon, without the path. The icon should reside in the res/drawable folder of the Android project, as explained in [Android's official guide](https://developer.android.com/guide/topics/resources/drawable-resource#BitmapFile)._
 
 ##### setNotificationLargeIcon example

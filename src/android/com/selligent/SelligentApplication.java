@@ -2,6 +2,7 @@ package com.selligent;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
@@ -33,6 +34,19 @@ public class SelligentApplication extends Application {
             SMManager.NOTIFICATION_ACTIVITY = Class.forName(settings.getActivityName());
 
             smManager.start(smSettings, this);
+
+            final Resources resources = this.getResources();
+
+            final int smallIconResourceId = resources.getIdentifier(settings.getNotificationSmallIcon(), "drawable", this.getPackageName());
+            if(smallIconResourceId != 0) {
+                smManager.setNotificationSmallIcon(smallIconResourceId);
+            }
+
+            final int largeIconResourceId = resources.getIdentifier(settings.getNotificationLargeIcon(), "drawable", this.getPackageName());
+            if(largeIconResourceId  != 0) {
+                smManager.setNotificationLargeIcon(largeIconResourceId);
+            }
+
         } catch (JSONException e) {
             Log.e(TAG, "SMManager start failed: an error occurred while parsing the selligent.json file", e);
         } catch (IOException e) {

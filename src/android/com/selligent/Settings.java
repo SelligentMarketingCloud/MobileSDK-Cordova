@@ -11,6 +11,8 @@ class Settings {
     private String privateKey;
     private String googleApplicationId;
     private String activityName;
+    private String notificationSmallIcon;
+    private String notificationLargeIcon;
     private Boolean configureLocationServices;
     private ClearCacheIntervalValue clearCacheIntervalValue;
     private InAppMessageRefreshType inAppMessageRefreshType;
@@ -38,6 +40,10 @@ class Settings {
         return activityName;
     }
 
+    public String getNotificationSmallIcon() { return notificationSmallIcon; }
+
+    public String getNotificationLargeIcon() { return notificationLargeIcon; }
+
     public Boolean getConfigureLocationServices() {
         return configureLocationServices;
     }
@@ -63,6 +69,8 @@ class Settings {
         settings.googleApplicationId = settingsJSONObject.optString("googleApplicationId");
         settings.configureLocationServices = settingsJSONObject.optBoolean("configureLocationServices");
         settings.activityName = settingsJSONObject.getString("fullyQualifiedNotificationActivityClassName");
+        settings.notificationSmallIcon = settingsJSONObject.optString("notificationSmallIcon");
+        settings.notificationLargeIcon = settingsJSONObject.optString("notificationLargeIcon");
         final Integer clearCacheIndex = settingsJSONObject.optInt("clearCacheIntervalValue");
         if (clearCacheIndex != 0) {
             settings.clearCacheIntervalValue = ClearCacheIntervalValue.valueOf(clearCacheIndex);
