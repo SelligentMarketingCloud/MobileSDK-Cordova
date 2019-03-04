@@ -1,11 +1,11 @@
 repositories {
     flatDir{
           dirs 'libs'
-    }        
+    }
 }
 
 dependencies {
-    implementation (name:'selligent-sdk-1.7.3', ext:'aar')
+    implementation (name:'selligent-sdk-2.1.1', ext:'aar')
 }
 
 android {

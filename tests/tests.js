@@ -153,7 +153,7 @@ exports.defineAutoTests = function () {
                 expect(typeof response === 'string').toBeTruthy();
 
                 if (cordova.platformId === "android") {
-                    expect(response).toBe("1.7.0");
+                    expect(response).toBe("2.1.1");
                 } else if (cordova.platformId === "ios") {
                     expect(response).toBe("2.0.1");
                 }

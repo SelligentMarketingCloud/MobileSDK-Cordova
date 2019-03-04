@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin
-    xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="1.0.6">
+    xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="1.0.7">
     <name>Selligent Cordova</name>
     <description>Cordova bridge for the Selligent SDK</description>
     <license>MIT</license>
@@ -46,8 +46,8 @@
         <source-file src="src/android/com/selligent/GCMTokenBroadcastEventDataParser.java" target-dir="src/com/selligent" />
         <source-file src="src/android/com/selligent/ButtonBroadcastEventDataParser.java" target-dir="src/com/selligent" />
         <!-- ADDITIONAL LIBRARIES -->
-        <framework src="src/android/frameworks/selligent-sdk-1.7.3.gradle" custom="true" type="gradleReference" />
-        <lib-file src="src/android/frameworks/selligent-sdk-1.7.3.aar" target="libs/selligent-sdk-1.7.3.aar" />
+        <framework src="src/android/frameworks/selligent-sdk-2.1.1.gradle" custom="true" type="gradleReference" />
+        <lib-file src="src/android/frameworks/selligent-sdk-2.1.1.aar" target="libs/selligent-sdk-2.1.1.aar" />
     </platform>
     <platform name="ios">
         <js-module src="www/ios/pluginIos.js" name="SelligentIos">
