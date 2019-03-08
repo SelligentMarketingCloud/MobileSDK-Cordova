@@ -56,6 +56,24 @@ Add the following properties to the `selligent.json` file:
 
 > _Note: only parse the name of the icon, without the path. The icon should reside in the res/drawable folder of the Android project, as explained in [Android's official guide](https://developer.android.com/guide/topics/resources/drawable-resource#BitmapFile)._
 
+#### Third party plugins
+
+The plugin has a cordova build hook for Android. The hook will rebuild the `ext.postBuildExtras` section of the  `build-extras.gradle` file. It will add various repositories and settings needed to build the plugin. You can customize this file yourself, but it's important to keep the `ext.postBuildExtras` section last.
+
+All dependency verions of this plugin are preferences that can be customized. The preferences are the following: `MULTIDEX_VERSION, APP_COMPAT_VERSION, FIREBASE_VERSION, FIREBASE_JOB_DISPATCHER_VERSION, PLAY_SERVICES_VERSION, PLOT_PROJECTS_VERSION, GSON_VERSION, METADATA_EXTRACTOR_VERSION`
+
+#### Upgrading the plugin to a new version
+
+Execute the following steps:
+
+- `$ cordova plugin rm selligent-cordova`
+- `$ cordova platform rm android`
+- `$ cordova plugin platform add android`
+- `$ cordova plugin add @selligent-marketing-cloud/selligent-cordova`
+- Follow the above installation steps again.
+
+If for some reason you can't remove and rebuild the Android platform it's important to remove any references to the sdk in the `project.properties` and `build.gradle` files.
+
 ## iOS Specific installation
 
 For remote push notifications, follow section 4 **Configure the APNS (Apple Push Notification Service)**, of the **IOS - Using the SDK** pdf.

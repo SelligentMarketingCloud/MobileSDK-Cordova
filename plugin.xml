@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin
-    xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="1.0.7">
+    xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="1.0.8">
     <name>Selligent Cordova</name>
     <description>Cordova bridge for the Selligent SDK</description>
     <license>MIT</license>
@@ -47,6 +47,36 @@
         <source-file src="src/android/com/selligent/ButtonBroadcastEventDataParser.java" target-dir="src/com/selligent" />
         <!-- ADDITIONAL LIBRARIES -->
         <framework src="src/android/frameworks/selligent-sdk-2.1.1.gradle" custom="true" type="gradleReference" />
+
+        <preference name="MULTIDEX_VERSION" default="1.0.3"/>
+        <framework src="com.android.support:multidex:$MULTIDEX_VERSION" />
+
+        <preference name="APP_COMPAT_VERSION" default="27.1.1"/>
+        <framework src="com.android.support:appcompat-v7:$APP_COMPAT_VERSION" />
+        <framework src="com.android.support:cardview-v7:$APP_COMPAT_VERSION" />
+        <framework src="com.android.support:design:$APP_COMPAT_VERSION" />
+        <framework src="com.android.support:support-v4:$APP_COMPAT_VERSION" />
+
+        <preference name="FIREBASE_VERSION" default="15.0.2"/>
+        <framework src="com.google.firebase:firebase-core:$FIREBASE_VERSION" />
+        <framework src="com.google.firebase:firebase-messaging:$FIREBASE_VERSION" />
+
+        <preference name="FIREBASE_JOB_DISPATCHER_VERSION" default="0.8.5"/>
+        <framework src="com.firebase:firebase-jobdispatcher:$FIREBASE_JOB_DISPATCHER_VERSION" />
+
+        <preference name="PLAY_SERVICES_VERSION" default="16.0.0"/>
+        <framework src="com.google.android.gms:play-services-maps:$PLAY_SERVICES_VERSION" />
+        <framework src="com.google.android.gms:play-services-location:$PLAY_SERVICES_VERSION" />
+
+        <preference name="PLOT_PROJECTS_VERSION" default="2.5.1"/>
+        <framework src="com.plotprojects:plot-android:$PLOT_PROJECTS_VERSION" />
+
+        <preference name="GSON_VERSION" default="2.8.2"/>
+        <framework src="com.google.code.gson:gson:$GSON_VERSION" />
+
+        <preference name="METADATA_EXTRACTOR_VERSION" default="2.9.1"/>
+        <framework src="com.drewnoakes:metadata-extractor:$METADATA_EXTRACTOR_VERSION" />
+
         <lib-file src="src/android/frameworks/selligent-sdk-2.1.1.aar" target="libs/selligent-sdk-2.1.1.aar" />
     </platform>
     <platform name="ios">
