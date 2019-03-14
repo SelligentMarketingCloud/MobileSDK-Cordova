@@ -17,6 +17,7 @@ var ARE_NOTIFICATIONS_ENABLED = "areNotificationsEnabled";
 var SET_NOTIFICATION_SMALL_ICON = "setNotificationSmallIcon";
 var SET_NOTIFICATION_LARGE_ICON = "setNotificationLargeIcon";
 var GET_GCM_TOKEN = "getGCMToken";
+var SET_FIREBASE_TOKEN = "setFirebaseToken";
 var GET_REMOTE_MESSAGES_DISPLAY_TYPE = "getRemoteMessagesDisplayType";
 
 
@@ -28,7 +29,7 @@ var Selligent = {};
 
 /**
  * Set application to the Selligent manager.
- * 
+ *
  * @param {function} successCallback Callback function on success.
  * @param {function} errorCallback Callback function on error.
  */
@@ -47,11 +48,11 @@ Selligent.setApplication = function (successCallback, errorCallback) {
 
 /**
  * Enable logging messages on Android.
- * 
+ *
  * @param {function} successCallback Callback function on success.
  * @param {function} errorCallback Callback function on error.
  * @param {boolean} shouldEnableLoggingMessages Boolean to enable/disable logging messages on Android.
- * @returns 
+ * @returns
  */
 Selligent.enableAndroidLogging = function (successCallback, errorCallback, shouldEnableLoggingMessages) {
 	// check that callbacks are functions (argscheck doesn't support checking for booleans)
@@ -76,13 +77,13 @@ Selligent.enableAndroidLogging = function (successCallback, errorCallback, shoul
 
 /**
  * Enable/disable in-app messages on Android.
- * 
+ *
  * Android specific: if args is a boolean set to "true", the in-app messages will be enabled with a default refresh type "DAY".
- * 
+ *
  * @param {function} successCallback Callback function on success.
  * @param {function} errorCallback Callback function on error.
  * @param {(boolean|InAppMessageRefreshType)} options Boolean to enable/disable in-app messages or an enum InAppMessageRefreshType to enable and set which in-app messages should be enabled.
- * @returns 
+ * @returns
  */
 Selligent.enableInAppMessages = function (successCallback, errorCallback, options) {
 	// check that callbacks are functions (can't check options as it can be a boolean or number)
@@ -118,7 +119,7 @@ Selligent.enableInAppMessages = function (successCallback, errorCallback, option
 
 /**
  * To check if in app messages are enabled on Android.
- * 
+ *
  * @param {function} successCallback Callback function on success.
  * @param {function} errorCallback Callback function on error.
  * @returns {boolean} Returns a boolean indicating whether in-app messages are enabled or disabled on Android.
@@ -137,7 +138,7 @@ Selligent.areInAppMessagesEnabled = function (successCallback, errorCallback) {
 
 /**
  * Display message on Android.
- * 
+ *
  * @param {function} successCallback Callback function on success.
  * @param {function} errorCallback Callback function on error.
  * @param {string} messageId Id of the message.
@@ -163,7 +164,7 @@ Selligent.displayMessage = function (successCallback, errorCallback, messageId) 
 
 /**
  * Send event.
- * 
+ *
  * @param {function} successCallback Callback function on success.
  * @param {function} errorCallback Callback function on error.
  * @param {object} event Event to send.
@@ -212,10 +213,10 @@ Selligent.sendEvent = function (successCallback, errorCallback, event) {
 
 /**
  * Subscribe to events.
- * 
+ *
  * @param {function} successCallback Callback function on success.
  * @param {function} errorCallback Callback function on error.
- * @param {array} customEvents Array of custom events to subscribe to. 
+ * @param {array} customEvents Array of custom events to subscribe to.
  * @returns {object} Returns an object containing the broadcast event data if available.
  */
 Selligent.subscribeToEvents = function (successCallback, errorCallback, customEvents) {
@@ -257,7 +258,7 @@ Selligent.subscribeToEvents = function (successCallback, errorCallback, customEv
 
 /**
  * Check if notifications are enabled or disabled.
- *  
+ *
  * @param {function} successCallback Callback function on success.
  * @param {function} errorCallback Callback function on error.
  * @returns {boolean} Returns a boolean stating notifications are enabled or disabled.
@@ -276,7 +277,7 @@ Selligent.areNotificationsEnabled = function (successCallback, errorCallback) {
 
 /**
  * Set the resource for the small icon for notifications on Android.
- * 
+ *
  * @param {function} successCallback Callback function on success.
  * @param {function} errorCallback Callback function on error.
  * @param {string} iconName Id of the message.
@@ -302,7 +303,7 @@ Selligent.setNotificationSmallIcon = function (successCallback, errorCallback, i
 
 /**
  * Set the resource for the large icon for notifications on Android.
- * 
+ *
  * @param {function} successCallback Callback function on success.
  * @param {function} errorCallback Callback function on error.
  * @param {string} iconName Id of the message.
@@ -329,7 +330,7 @@ Selligent.setNotificationLargeIcon = function (successCallback, errorCallback, i
 
 /**
  * Get GCM Token
- * 
+ *
  * @param {function} successCallback Callback function on success.
  * @param {function} errorCallback Callback function on error.
  * @returns {string} Returns the GCM token on Android.
@@ -347,8 +348,34 @@ Selligent.getGCMToken = function (successCallback, errorCallback) {
 };
 
 /**
+ * Set the firebase (GCM) token
+ *
+ * @param {function} successCallback Callback function on success.
+ * @param {function} errorCallback Callback function on error.
+ * @param {string} token the firebase token.
+ */
+Selligent.setFirebaseToken = function (successCallback, errorCallback, token) {
+	// check that callbacks are functions
+	argscheck.checkArgs('FFS', 'Selligent.setFirebaseToken', arguments);
+
+	// check that "token" is a string that is not empty
+	if (!SelligentHelpers.typeMatches(token, "string") || token.length === 0) {
+		errorCallback(SelligentHelpers.WRONG_ARGUMENTS + " " + "Expected a string (not empty)." + " " + SelligentHelpers.MORE_INFORMATION);
+		return;
+	}
+
+	cordova.exec(
+		successCallback,
+		errorCallback,
+		SELLIGENT_PLUGIN,
+		SET_FIREBASE_TOKEN,
+		[token]
+	);
+};
+
+/**
  * Get remote messages display type.
- * 
+ *
  * @param {function} successCallback Callback function on success.
  * @param {function} errorCallback Callback function on error.
  * @returns {string} Returns the display type of remote messages on Android.

@@ -237,6 +237,8 @@ You can catch the deeplinks 2 ways:
     * [getGCMToken Example](#getgcmtoken-example)
   * [Selligent.getRemoteMessagesDisplayType(successCallback, errorCallback)](#selligentgetremotemessagesdisplaytypesuccesscallback--errorcallback)
     * [getRemoteMessagesDisplayType Example](#getremotemessagesdisplaytype-example)
+  * [Selligent.setFirebaseToken(successCallback, errorCallback, token)](#selligentsetfirebasetokensuccesscallback--errorcallback--token)
+    * [setFirebaseToken Example](#setFirebaseToken-example)
 
 * [iOS Only/Specific Methods](#ios-only-specific-methods)
   * [Selligent.enableiOSLogging(successCallback, errorCallback, logLevels)](#selligentenableiosloggingsuccesscallback--errorcallback--loglevels)
@@ -309,6 +311,9 @@ The `settings` parameter is an object containing the web service URL, the Sellig
 | shouldClearBadge                            | boolean                                                                                       | No       | iOS Only     |
 | shouldDisplayRemoteNotification             | boolean                                                                                       | No       | iOS Only     |
 | shouldPerformBackgroundFetch                | boolean                                                                                       | No       | iOS Only     |
+| doNotListenToThePush                        | boolean                                                                                       | No       | Android Only     |
+| doNotFetchTheToken                          | boolean                                                                                       | No       | Android Only     |
+|  loadCacheAsynchronously                    | boolean                                                                                       | No       | Android Only     |
 | fullyQualifiedNotificationActivityClassName | string                                                                                        | No       | Android Only |
 | remoteMessageDisplayType                    | enum [Selligent.AndroidRemoteMessagesDisplayType](#selligentAndroidRemoteMessagesDisplayType) | No       | Android Only |
 
@@ -916,6 +921,24 @@ window.Selligent.getRemoteMessagesDisplayType(
   function (error) { // error callback
     ...
   }
+);
+```
+
+#### Selligent.setFirebaseToken(successCallback, errorCallback, token)
+
+Set the firebase token manually.
+
+##### setFirebaseToken example
+
+```javascript
+window.Selligent.setFirebaseToken(
+    function (response) { // success callback
+      ...
+    },
+    function (error) { // error callback
+      ...
+    },
+    '123xyz'
 );
 ```
 

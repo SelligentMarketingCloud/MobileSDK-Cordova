@@ -53,6 +53,7 @@ public class SelligentPlugin extends CordovaPlugin {
     private static final String SET_NOTIFICATION_LARGE_ICON = "setNotificationLargeIcon";
     private static final String GET_REMOTE_MESSAGES_DISPLAY_TYPE = "getRemoteMessagesDisplayType";
     private static final String GET_GCM_TOKEN = "getGCMToken";
+    private static final String SET_FIREBASE_TOKEN = "setFirebaseToken";
     private static final String SUBSCRIBE_TO_EVENTS = "subscribeToEvents";
 
     private SMManager smManager;
@@ -106,6 +107,8 @@ public class SelligentPlugin extends CordovaPlugin {
                 return getRemoteMessagesDisplayType(callbackContext);
             case GET_GCM_TOKEN:
                 return getGCMToken(callbackContext);
+            case SET_FIREBASE_TOKEN:
+                return setFirebaseToken(args, callbackContext);
             case SUBSCRIBE_TO_EVENTS:
                 return subscribeToEvents(args, callbackContext);
             default:
@@ -305,6 +308,14 @@ public class SelligentPlugin extends CordovaPlugin {
         final String token = smManager.getGCMToken();
 
         callbackContext.success(token);
+        return true;
+    }
+
+    private boolean setFirebaseToken(JSONArray args, CallbackContext callbackContext) throws JSONException {
+        final String token = args.getString(0);
+
+        smManager.setFirebaseToken(token);
+        callbackContext.success();
         return true;
     }
 

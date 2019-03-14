@@ -11,18 +11,37 @@ class SMSettingsFactory {
         smSettings.PrivateKey = settings.getPrivateKey();
         smSettings.GoogleApplicationId = settings.getGoogleApplicationId();
         smSettings.ConfigureGeolocation = settings.getConfigureLocationServices();
+
+        final Boolean doNotFetchTheToken = settings.getDoNotFetchTheToken();
+        if (doNotFetchTheToken != null) {
+            smSettings.DoNotFetchTheToken = doNotFetchTheToken;
+        }
+
+        final Boolean doNotListenToThePush = settings.getDoNotListenToThePush();
+        if (doNotListenToThePush != null) {
+            smSettings.DoNotListenToThePush = doNotListenToThePush;
+        }
+
+        final Boolean loadCacheAsynchronously = settings.getLoadCacheAsynchronously();
+        if (loadCacheAsynchronously != null) {
+            smSettings.LoadCacheAsynchronously = loadCacheAsynchronously;
+        }
+
         final ClearCacheIntervalValue clearCacheIntervalValue = settings.getClearCacheIntervalValue();
         if (clearCacheIntervalValue != null) {
             smSettings.ClearCacheIntervalValue = clearCacheIntervalValue.getSmClearCache();
         }
+
         final InAppMessageRefreshType inAppMessageRefreshType = settings.getInAppMessageRefreshType();
         if (inAppMessageRefreshType != null) {
             smSettings.InAppMessageRefreshType = inAppMessageRefreshType.getSmInAppRefreshType();
         }
+
         final RemoteMessageDisplayType remoteMessageDisplayType = settings.getRemoteMessageDisplayType();
         if (remoteMessageDisplayType != null) {
             smSettings.RemoteMessageDisplayType = remoteMessageDisplayType.getSmRemoteMessageDisplayType();
         }
+
         return smSettings;
     }
 

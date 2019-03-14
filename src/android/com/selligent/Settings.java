@@ -14,6 +14,9 @@ class Settings {
     private String notificationSmallIcon;
     private String notificationLargeIcon;
     private Boolean configureLocationServices;
+    private Boolean doNotFetchTheToken;
+    private Boolean doNotListenToThePush;
+    private Boolean loadCacheAsynchronously;
     private ClearCacheIntervalValue clearCacheIntervalValue;
     private InAppMessageRefreshType inAppMessageRefreshType;
     private RemoteMessageDisplayType remoteMessageDisplayType;
@@ -44,6 +47,12 @@ class Settings {
 
     public String getNotificationLargeIcon() { return notificationLargeIcon; }
 
+    public Boolean getDoNotFetchTheToken() { return doNotFetchTheToken; }
+
+    public Boolean getDoNotListenToThePush() { return doNotListenToThePush; }
+
+    public Boolean getLoadCacheAsynchronously() { return loadCacheAsynchronously; }
+
     public Boolean getConfigureLocationServices() {
         return configureLocationServices;
     }
@@ -71,6 +80,9 @@ class Settings {
         settings.activityName = settingsJSONObject.getString("fullyQualifiedNotificationActivityClassName");
         settings.notificationSmallIcon = settingsJSONObject.optString("notificationSmallIcon");
         settings.notificationLargeIcon = settingsJSONObject.optString("notificationLargeIcon");
+        settings.doNotFetchTheToken = settingsJSONObject.optBoolean("doNotFetchTheToken");
+        settings.doNotListenToThePush = settingsJSONObject.optBoolean("doNotListenToThePush");
+        settings.loadCacheAsynchronously = settingsJSONObject.optBoolean("loadCacheAsynchronously");
         final Integer clearCacheIndex = settingsJSONObject.optInt("clearCacheIntervalValue");
         if (clearCacheIndex != 0) {
             settings.clearCacheIntervalValue = ClearCacheIntervalValue.valueOf(clearCacheIndex);
