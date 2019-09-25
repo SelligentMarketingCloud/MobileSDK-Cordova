@@ -578,8 +578,8 @@ The `type` property is used to define the event as *custom* or *specific* event,
 
 To define it as a custom event, one should use the `Selligent.EventType.CUSTOM` constant. All other event types can be used to define the event as something specific.
 
-When an event is a *specific* event type, the `event` object requires an `email` property containing a string, and has an optional property `data` which is an object that can contain other information.
-When an event is a *custom* event type, the `event` object requires a `data` property containing an object which contains other information, and ignores the `email` property.
+When an event is a *custom* event type, the `event` object requires an `email` property containing a string, and has an optional property `data` which is an object that can contain other information.
+When an event is a *specific* event type, the `event` object requires a `data` property containing an object which contains other information, and ignores the `email` property.
 
 **iOS specific:**
 

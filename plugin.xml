@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin
-    xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="1.0.9">
+    xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="1.0.10">
     <name>Selligent Cordova</name>
     <description>Cordova bridge for the Selligent SDK</description>
     <license>MIT</license>
@@ -117,7 +117,7 @@
         <header-file src="src/ios/Event+SMEvent.h"/>
         <source-file src="src/ios/Event+SMEvent.m"/>
 
-        <source-file src="src/ios/frameworks/libSelligentMobile2.0.1.a" framework="true" />
+        <source-file src="src/ios/frameworks/libSelligentMobile2.0.3.a" framework="true" />
         <header-file src="src/ios/frameworks/include/SMBaseMessage.h" />
         <header-file src="src/ios/frameworks/include/SMBlock.h" />
         <header-file src="src/ios/frameworks/include/SMClearCache.h" />
