@@ -19,6 +19,13 @@ Execute the following command: `ionic cordova plugin add @selligent-marketing-cl
 
 ## Android Specific installation
 
+> ### **Attention!**
+> Version **2.x** of the plugin requires AndroidX in order to work. Therefore the plugin is only compatible with **Cordova Android 9.x and up**. Make sure you enable AndroidX by adding the following line to your `config.xml`:
+>
+>```<preference name="AndroidXEnabled" value="true" />```  
+>
+> If you are using a lower version of Cordova Android, please use a lower version of the plugin.
+
 1. Add the **google-services** dependencies to the `./platforms/android/build.gradle` file:
 
   ```gradle
@@ -77,6 +84,8 @@ If for some reason you can't remove and rebuild the Android platform it's import
 ## iOS Specific installation
 
 For remote push notifications, follow section 4 **Configure the APNS (Apple Push Notification Service)**, of the **IOS - Using the SDK** pdf.
+
+If you want to use rich push notifications, you will also have to follow section 6.9 **Notification Extensions**.
 
 For geolocation services, follow section 6.5 **Geolocation**, of the **IOS - Using the SDK** pdf. You also need to configure several permissions described in 5.3.3 **Permission for geo location**.
 

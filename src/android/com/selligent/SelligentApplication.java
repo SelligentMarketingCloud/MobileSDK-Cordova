@@ -3,7 +3,8 @@ package com.selligent;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.selligent.sdk.SMManager;
@@ -15,7 +16,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class SelligentApplication extends Application {
+public class SelligentApplication extends MultiDexApplication {
     static final String TAG = "SM_CORDOVA_SDK";
 
     @Override
