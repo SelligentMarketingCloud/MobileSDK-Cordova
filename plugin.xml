@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin
-    xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="2.0.1">
+    xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="2.0.2">
     <name>Selligent Cordova</name>
     <description>Cordova bridge for the Selligent SDK</description>
     <license>MIT</license>
@@ -68,7 +68,7 @@
         <framework src="com.google.android.gms:play-services-maps:$PLAY_SERVICES_VERSION" />
         <framework src="com.google.android.gms:play-services-location:$PLAY_SERVICES_VERSION" />
 
-        <preference name="PLOT_PROJECTS_VERSION" default="3.2.0"/>
+        <preference name="PLOT_PROJECTS_VERSION" default="3.12.1"/>
         <framework src="com.plotprojects:plot-android:$PLOT_PROJECTS_VERSION" />
 
         <preference name="GSON_VERSION" default="2.8.2"/>
@@ -164,7 +164,7 @@
         <header-file src="src/ios/frameworks/include/SMNSNotification.h" />
         <header-file src="src/ios/frameworks/include/SMSuccess.h" />
 
-        <framework src="PlotPlugin" type="podspec" spec="2.1.0" />
+        <framework src="PlotPlugin" type="podspec" spec="3.3.2" />
     </platform>
     <hook type="after_plugin_add" src="hooks/after_plugin_add.js" />
     <hook type="before_plugin_uninstall" src="hooks/before_plugin_uninstall.js" />
