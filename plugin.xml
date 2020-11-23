@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin
-    xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="2.0.2">
+    xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="2.1.0">
     <name>Selligent Cordova</name>
     <description>Cordova bridge for the Selligent SDK</description>
     <license>MIT</license>
@@ -46,7 +46,7 @@
         <source-file src="src/android/com/selligent/GCMTokenBroadcastEventDataParser.java" target-dir="src/com/selligent" />
         <source-file src="src/android/com/selligent/ButtonBroadcastEventDataParser.java" target-dir="src/com/selligent" />
         <!-- ADDITIONAL LIBRARIES -->
-        <framework src="src/android/frameworks/selligent-sdk-3.3.0.gradle" custom="true" type="gradleReference" />
+        <framework src="src/android/frameworks/selligent-sdk.gradle" custom="true" type="gradleReference" />
 
         <preference name="MULTIDEX_VERSION" default="1.0.3"/>
         <framework src="com.android.support:multidex:$MULTIDEX_VERSION" />
@@ -77,7 +77,7 @@
         <preference name="METADATA_EXTRACTOR_VERSION" default="2.9.1"/>
         <framework src="com.drewnoakes:metadata-extractor:$METADATA_EXTRACTOR_VERSION" />
 
-        <lib-file src="src/android/frameworks/selligent-sdk-3.3.0.aar" target="libs/selligent-sdk-3.3.0.aar" />
+        <lib-file src="src/android/frameworks/selligent-sdk.aar" target="libs/selligent-sdk.aar" />
     </platform>
     <platform name="ios">
         <js-module src="www/ios/pluginIos.js" name="SelligentIos">
@@ -117,7 +117,7 @@
         <header-file src="src/ios/Event+SMEvent.h"/>
         <source-file src="src/ios/Event+SMEvent.m"/>
 
-        <source-file src="src/ios/frameworks/libSelligentMobile2.4.a" framework="true" />
+        <source-file src="src/ios/frameworks/libSelligentMobile2.5.a" framework="true" />
         <header-file src="src/ios/frameworks/include/SMBaseMessage.h" />
         <header-file src="src/ios/frameworks/include/SMBlock.h" />
         <header-file src="src/ios/frameworks/include/SMClearCache.h" />

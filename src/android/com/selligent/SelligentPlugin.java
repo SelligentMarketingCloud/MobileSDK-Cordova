@@ -22,10 +22,14 @@ import com.selligent.sdk.SMCallback;
 import com.selligent.sdk.SMDeviceInfos;
 import com.selligent.sdk.SMEvent;
 import com.selligent.sdk.SMForegroundGcmBroadcastReceiver;
+import com.selligent.sdk.SMInAppMessage;
+import com.selligent.sdk.SMInAppMessageReturn;
 import com.selligent.sdk.SMManager;
+import com.selligent.sdk.SMNotificationButton;
 import com.selligent.sdk.SMRemoteMessageDisplayType;
 import com.selligent.sdk.SMSettings;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -42,6 +46,9 @@ public class SelligentPlugin extends CordovaPlugin {
     private static final String ARE_IN_APP_MESSAGES_ENABLED = "areInAppMessagesEnabled";
     private static final String ENABLE_IN_APP_MESSAGES = "enableInAppMessages";
     private static final String DISPLAY_MESSAGE = "displayMessage";
+    private static final String GET_IN_APP_MESSAGES = "getInAppMessages";
+    private static final String SET_IN_APP_MESSAGE_AS_SEEN = "setInAppMessageAsSeen";
+    private static final String EXECUTE_BUTTON_ACTION = "executeButtonAction";
     private static final String ENABLE_GEOLOCATION = "enableGeolocation";
     private static final String IS_GEOLOCATION_ENABLED = "isGeolocationEnabled";
     private static final String SEND_EVENT = "sendEvent";
@@ -85,6 +92,12 @@ public class SelligentPlugin extends CordovaPlugin {
                 return enableInAppMessages(args, callbackContext);
             case DISPLAY_MESSAGE:
                 return displayMessage(args, callbackContext);
+            case GET_IN_APP_MESSAGES:
+                return getInAppMessages(callbackContext);
+            case SET_IN_APP_MESSAGE_AS_SEEN:
+                return setInAppMessageAsSeen(args, callbackContext);
+            case EXECUTE_BUTTON_ACTION:
+                return executeButtonAction(args, callbackContext);
             case ENABLE_GEOLOCATION:
                 return enableGeolocation(args, callbackContext);
             case IS_GEOLOCATION_ENABLED:
@@ -182,6 +195,96 @@ public class SelligentPlugin extends CordovaPlugin {
 
         smManager.displayMessage(messageId, cordova.getActivity());
         callbackContext.success();
+        return true;
+    }
+
+    private boolean getInAppMessages(CallbackContext callbackContext) {
+        smManager.getInAppMessages(new SMInAppMessageReturn() {
+            @Override
+            public void onRetrieve(ArrayList<SMInAppMessage> inAppMessages) {
+                try {
+                    JSONArray iamJSONArray = new JSONArray();
+
+                    for (SMInAppMessage message : inAppMessages) {
+                        JSONObject messageJSONObject = new JSONObject();
+
+                        messageJSONObject.put("id", message.id);
+                        messageJSONObject.put("title", message.title);
+                        messageJSONObject.put("body", message.getBody());
+                        messageJSONObject.put("creationDate", message.getCreationDate());
+                        messageJSONObject.put("expirationDate", message.getExpirationDate());
+                        messageJSONObject.put("receptionDate", message.getReceptionDate());
+                        messageJSONObject.put("hasBeenSeen", message.hasBeenSeen());
+
+                        JSONArray buttonsJSONArray = new JSONArray();
+
+                        for(SMNotificationButton button : message.getButtons()) {
+                            JSONObject buttonsJSONObject = new JSONObject();
+
+                            buttonsJSONObject.put("id", button.id);
+                            buttonsJSONObject.put("value", button.value);
+                            buttonsJSONObject.put("label", button.label);
+                            buttonsJSONObject.put("action", button.action);
+                            buttonsJSONObject.put("type", button.type);
+
+                            buttonsJSONArray.put(buttonsJSONObject);
+                        }
+                        messageJSONObject.put("buttons", buttonsJSONArray);
+
+                        iamJSONArray.put(messageJSONObject);
+                    }
+                    callbackContext.success(iamJSONArray);
+                } catch (JSONException e) {
+                    callbackContext.error(e.getMessage());
+                }
+            }
+        });
+        return true;
+    }
+
+    private boolean setInAppMessageAsSeen(JSONArray args, CallbackContext callbackContext) throws JSONException {
+        final String messageId = args.getString(0);
+
+        smManager.getInAppMessages(new SMInAppMessageReturn() {
+            @Override
+            public void onRetrieve(ArrayList<SMInAppMessage> inAppMessages) {
+                for(SMInAppMessage message : inAppMessages) {
+                    if(message.id.equals(messageId)) {
+                        smManager.setInAppMessageAsSeen(message);
+                        callbackContext.success();
+                        return;
+                    }
+                }
+                callbackContext.error(String.format("No message with id %s found", messageId));
+            }
+        });
+        return true;
+    }
+
+    private boolean executeButtonAction(JSONArray args, CallbackContext callbackContext) throws JSONException {
+        final String buttonId = args.getString(0);
+        final String messageId = args.getString(1);
+
+
+        smManager.getInAppMessages(new SMInAppMessageReturn() {
+            @Override
+            public void onRetrieve(ArrayList<SMInAppMessage> inAppMessages) {
+                for(SMInAppMessage message : inAppMessages) {
+                    if(message.id.equals(messageId)) {
+                        for(SMNotificationButton button : message.getButtons()) {
+                            if(button.id.equals(buttonId)) {
+                                smManager.executeButtonAction(cordova.getContext(), button, message);
+                                callbackContext.success();
+                                return;
+                            }
+                        }
+                        callbackContext.error("buttonId does not exist in message.");
+                        return;
+                    }
+                }
+                callbackContext.error(String.format("No message with id %s found", messageId));
+            }
+        });
         return true;
     }
 

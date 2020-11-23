@@ -21,6 +21,9 @@
 - (void)getLastRemotePushNotification:(CDVInvokedUrlCommand *)command;
 - (void)displayNotification:(CDVInvokedUrlCommand *)command;
 - (void)subscribeToEvents:(CDVInvokedUrlCommand *)command;
+- (void)getInAppMessages:(CDVInvokedUrlCommand *)command;
+- (void)setInAppMessageAsSeen:(CDVInvokedUrlCommand *)command;
+- (void)executeButtonAction:(CDVInvokedUrlCommand *)command;
 
 - (void)sendRemoteNotificationFetchCompleted:(NSDictionary *)notification backgroundFetchResult:(UIBackgroundFetchResult)backgroundResult;
 

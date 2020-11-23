@@ -85,7 +85,8 @@ If for some reason you can't remove and rebuild the Android platform it's import
 
 For remote push notifications, follow section 4 **Configure the APNS (Apple Push Notification Service)**, of the **IOS - Using the SDK** pdf.
 
-If you want to use rich push notifications, you will also have to follow section 6.9 **Notification Extensions**.
+If you want rich push notifications, follow section 6.9 **Notification Extensions** as well.  
+Make sure you add your `appGroupId` to the `selligent.json`.
 
 For geolocation services, follow section 6.5 **Geolocation**, of the **IOS - Using the SDK** pdf. You also need to configure several permissions described in 5.3.3 **Permission for geo location**.
 
@@ -102,8 +103,27 @@ For geolocation services, follow section 6.5 **Geolocation**, of the **IOS - Usi
     "fullyQualifiedNotificationActivityClassName": "com.some.project.MainActivity"
 }
 ```
+**Detailed overview:**
 
-For a detailed overview of the settings see [Selligent.reloadSettings(successCallback, errorCallback, settings)](#selligentreloadsettingssuccesscallback--errorcallback--settings).
+| Property                                    | Type                                                                                          | Required | Platform     |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------- | -------- | ------------ |
+| url                                         | string                                                                                        | Yes      | Both         |
+| clientId                                    | string                                                                                        | Yes      | Both         |
+| privateKey                                  | string                                                                                        | Yes      | Both         |
+| googleApplicationId                         | string                                                                                        | No       | Both         |
+| clearCacheIntervalValue                     | enum [Selligent.ClearCacheIntervalValue](#selligentclearcacheintervalvalue)                   | No       | Both         |
+| configureLocationServices                   | boolean                                                                                       | No       | Both         |
+| inAppMessageRefreshType                     | enum [Selligent.InAppMessageRefreshType](#selligentinappmessagerefreshtype)                   | No       | Both         |
+| appGroupId                                  | string                                                                                        | No       | iOS Only     |
+| shouldClearBadge                            | boolean                                                                                       | No       | iOS Only     |
+| shouldDisplayRemoteNotification             | boolean                                                                                       | No       | iOS Only     |
+| shouldPerformBackgroundFetch                | boolean                                                                                       | No       | iOS Only     |
+| doNotListenToThePush                        | boolean                                                                                       | No       | Android Only     |
+| doNotFetchTheToken                          | boolean                                                                                       | No       | Android Only     |
+|  loadCacheAsynchronously                    | boolean                                                                                       | No       | Android Only     |
+| fullyQualifiedNotificationActivityClassName | string                                                                                        | No       | Android Only |
+| remoteMessageDisplayType                    | enum [Selligent.AndroidRemoteMessagesDisplayType](#selligentAndroidRemoteMessagesDisplayType) | No       | Android Only |
+
 
 3. Add a button for testing purposes
 
@@ -204,9 +224,6 @@ You can catch the deeplinks 2 ways:
 * [Methods](#methods)
   * [Selligent.getVersionLib(successCallback, errorCallback)](#selligentgetversionlibsuccesscallback--errorcallback)
     * [getVersionLib example](#getversionlib-example)
-  * [Selligent.reloadSettings(successCallback, errorCallback, settings)](#selligentreloadsettingssuccesscallback--errorcallback--settings)
-    * [reloadSettings example](#reloadsettings-example)
-  * [Selligent.loadSettings(successCallback, errorCallback)](#selligentloadsettingssuccesscallback--errorcallback)
     * [loadSettings example](#loadsettings-example)
   * [Selligent.sendDeviceInfo(successCallback, errorCallback, options)](#selligentsenddeviceinfosuccesscallback--errorcallback--options)
     * [sendDeviceInfo example](#senddeviceinfo-example)
@@ -222,6 +239,12 @@ You can catch the deeplinks 2 ways:
     * [getLastRemotePushNotification Example](#getlastremotepushnotification-example)
   * [Selligent.enableInAppMessages(successCallback, errorCallback, options)](#selligentenableinappmessagessuccesscallback--errorcallback--options)
     * [enableInAppMessages example](#enableinappmessages-example)
+  * [Selligent.getInAppMessages(successCallback, errorCallback)](#selligentgetinappmessagessuccesscallback--errorcallback)
+    * [getInAppMessages example](#getinappmessages-example)
+  * [Selligent.setInAppMessageAsSeen(successCallback, errorCallback, messageId)](#selligentsetinappmessageasseensuccesscallback--errorcallback--messageid)
+    * [setInAppMessageAsSeen example](#setinappmessageasseen-example)
+  * [Selligent.executeButtonAction(successCallback, errorCallback, buttonId, messageId)](#selligentexecutebuttonactionsuccesscallback--errorcallback--buttonid--messageid)
+    * [executeButtonAction example](#executebuttonaction-example)
   * [Selligent.sendEvent(successCallback, errorCallback, event)](#selligentsendeventsuccesscallback--errorcallback--event)
     * [sendEvent example](#sendevent-example)
   * [Selligent.subscribeToEvents(successCallback, errorCallback)](#selligentsubscribetoeventssuccesscallback--errorcallback)
@@ -300,63 +323,13 @@ window.Selligent.getVersionLib(
     <b><a href="#api-reference">back to API ToC</a></b>
 </div>
 
-#### Selligent.reloadSettings(successCallback, errorCallback, settings)
-
-Can be used to reload and/or change the settings of the Selligent instance.
-
-The `settings` parameter is an object containing the web service URL, the Selligent client id and private key, the Google application id and any other optional parameters (see the table below for a detailed overview). There are parameters that can only be used on a specific platform, but can be passed to either and will be ignored when possible.
-
-**Detailed overview:**
-
-| Property                                    | Type                                                                                          | Required | Platform     |
-| ------------------------------------------- | --------------------------------------------------------------------------------------------- | -------- | ------------ |
-| url                                         | string                                                                                        | Yes      | Both         |
-| clientId                                    | string                                                                                        | Yes      | Both         |
-| privateKey                                  | string                                                                                        | Yes      | Both         |
-| googleApplicationId                         | string                                                                                        | No       | Both         |
-| clearCacheIntervalValue                     | enum [Selligent.ClearCacheIntervalValue](#selligentclearcacheintervalvalue)                   | No       | Both         |
-| configureLocationServices                   | boolean                                                                                       | No       | Both         |
-| inAppMessageRefreshType                     | enum [Selligent.InAppMessageRefreshType](#selligentinappmessagerefreshtype)                   | No       | Both         |
-| shouldClearBadge                            | boolean                                                                                       | No       | iOS Only     |
-| shouldDisplayRemoteNotification             | boolean                                                                                       | No       | iOS Only     |
-| shouldPerformBackgroundFetch                | boolean                                                                                       | No       | iOS Only     |
-| doNotListenToThePush                        | boolean                                                                                       | No       | Android Only     |
-| doNotFetchTheToken                          | boolean                                                                                       | No       | Android Only     |
-|  loadCacheAsynchronously                    | boolean                                                                                       | No       | Android Only     |
-| fullyQualifiedNotificationActivityClassName | string                                                                                        | No       | Android Only |
-| remoteMessageDisplayType                    | enum [Selligent.AndroidRemoteMessagesDisplayType](#selligentAndroidRemoteMessagesDisplayType) | No       | Android Only |
-
-##### reloadSettings example
-
-```javascript
-window.Selligent.reloadSettings(
-  function (response) { // success callback
-    ...
-  },
-  function (error) { // error callback
-    ...
-  },
-  {
-    url: "...",
-    clientId: "...",
-    privateKey: "...",
-    configureLocationServices: true,
-    shouldDisplayRemoteNotification: true, // will only be used on the iOS platform
-    remoteMessageDisplayType: Selligent.AndroidRemoteMessagesDisplayType.NOTIFICATION // will only be used on the Android platform
-  }
-);
-```
-
-<div align="right">
-    <b><a href="#api-reference">back to API ToC</a></b>
-</div>
 
 #### Selligent.loadSettings(successCallback, errorCallback)
 
 Load the Selligent settings from `www/assets/selligent.json`.
 
-The response of the success callback is a json-parsed object containing the settings from the file. This can be useful to use in combination with the reloadSettings method.
-For an overview of the settings object have a look at the reloadSettings method description above.
+The response of the success callback is a json-parsed object containing the settings from the file. 
+For an overview of the settings object have a look at the detailed overview above.
 
 ##### loadSettings example
 
@@ -561,6 +534,106 @@ window.Selligent.enableInAppMessages(
       ...
     },
     false
+);
+```
+
+<div align="right">
+    <b><a href="#api-reference">back to API ToC</a></b>
+</div>
+
+#### Selligent.getInAppMessages(successCallback, errorCallback)
+
+This method returns all the in app messages send to you.
+
+The response of the success callback is an array of objects which contain the in app message(s) information.
+
+**Detailed overview:**
+
+| Property           | Type                                                    | Description                                                       | Platform     |
+| ------------------ | ------------------------------------------------------- | ----------------------------------------------------------------- | ------------ |
+| id                 | string                                                  | Id of the in app message                                          | Both         |
+| title              | string                                                  | Title of the in app message                                       | Both         |
+| body               | string                                                  | Body of the in app message                                        | Both         |
+| creationDate       | number                                                  | Creation date of the in app message in unix time                  | Both         |
+| expirationDate     | number                                                  | Expiration date of the in app message in unix time                | Both         |
+| receptionDate      | number                                                  | Reception date of the in app message in unix time                 | Both         |
+| hasBeenSeen        | boolean                                                 | Indication if the in app message is seen                          | Both         | 
+| buttons            | array of objects                                        | Contains the buttons that are linked to the in app message        | Both         |
+
+<br />
+
+The `buttons` property is an array of button-objects which contain the information of a button linked to the in app message:
+
+<br />
+
+| Property           | Type                                                    | Description                                                       | Platform     |
+| ------------------ | ------------------------------------------------------- | ----------------------------------------------------------------- | ------------ |
+| id                 | string                                                  | Id of the button of the in app message                            | Both         |
+| label              | string                                                  | Label of the button of the in app message                         | Both         |
+| value              | string                                                  | Value of the button of the in app message                         | Both         |
+| type               | number                                                  | Type of the button of the in app message                          | Both         |
+| action             | number                                                  | Action of the button of the in app message                        | Android only |
+<br />
+
+##### getInAppMessages example
+
+```javascript
+window.Selligent.getInAppMessages(
+    function (response) { // success callback
+      ...
+    },
+    function (error) { // error callback
+      ...
+    }
+);
+```
+
+<div align="right">
+    <b><a href="#api-reference">back to API ToC</a></b>
+</div>
+
+#### Selligent.setInAppMessageAsSeen(successCallback, errorCallback, messageId)
+
+Possibility to mark an in app message as seen.
+
+This method requires beside the callbacks another property to indicate the current in app message. To accomplish this behavior,&nbsp; `messageId` is required.
+
+##### setInAppMessageAsSeen example
+
+```javascript
+window.Selligent.setInAppMessageAsSeen(
+    function (response) { // success callback
+      ...
+    },
+    function (error) { // error callback
+      ...
+    },
+    "id-of-message"
+);
+```
+
+<div align="right">
+    <b><a href="#api-reference">back to API ToC</a></b>
+</div>
+
+#### Selligent.executeButtonAction(successCallback, errorCallback, buttonId, messageId)
+
+Execute the action linked to the button.
+
+This method requires beside the callbacks another property to execute the action behind the button of the in app message. To accomplish this behavior,&nbsp; `buttonId` and `messageId` are required.
+
+##### executeButtonAction example
+
+```javascript
+window.Selligent.executeButtonAction(
+    function (response) { // success callback
+      ...
+    },
+    function (error) { // error callback
+      ...
+    },
+    "id-of-button",
+    "id-of-message"
 );
 ```
 

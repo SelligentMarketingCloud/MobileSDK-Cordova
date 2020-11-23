@@ -1,0 +1,19 @@
+repositories {
+    flatDir{
+          dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation (name:'selligent-sdk', ext:'aar')
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+    implementation 'androidx.work:work-runtime:2.4.0'
+    implementation 'androidx.concurrent:concurrent-futures:1.1.0'
+}
+
+android {
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+}

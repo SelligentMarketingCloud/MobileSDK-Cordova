@@ -80,6 +80,67 @@ static NSString * const BROADCAST_RECEIVEDREMOTENOTIFICATION = @"ReceivedRemoteN
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
+- (void)getInAppMessages:(CDVInvokedUrlCommand *)command {
+    NSArray *inAppMessages = [[SMManager sharedInstance] getInAppMessages];
+    NSMutableArray *mappedMessages = [NSMutableArray new];
+    for (SMInAppMessage *inAppMessage in inAppMessages) {
+        NSMutableArray *mappedLinks = [NSMutableArray new];
+        for (SMLink *link in [inAppMessage arrayIAMLinks]) {
+            [mappedLinks addObject: @{
+                @"id" : [link idButtonData],
+                @"label" : [link label],
+                @"value" : [link value],
+                @"type" : @([link type]),
+            }];
+        }
+        [mappedMessages addObject: @{
+            @"id" : [inAppMessage idMessage],
+            @"title" : [inAppMessage title],
+            @"body" : [inAppMessage body],
+            @"receptionDate" : [inAppMessage receptionDate] ? @([[inAppMessage receptionDate] timeIntervalSince1970]) : [NSNull null],
+            @"creationDate" : @([[inAppMessage creationDate] timeIntervalSince1970]),
+            @"expirationDate" : [inAppMessage expirationDate] ? @([[inAppMessage expirationDate] timeIntervalSince1970]) : [NSNull null],
+            @"hasBeenSeen" : @([inAppMessage isViewed]),
+            @"buttons" : mappedLinks
+        }];
+    }
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:mappedMessages] callbackId:command.callbackId];
+}
+
+- (void)setInAppMessageAsSeen:(CDVInvokedUrlCommand *)command {
+    NSString *messageId = command.arguments[0];
+    NSArray *inAppMessages = [[SMManager sharedInstance] getInAppMessages];
+    for (SMInAppMessage *inAppMessage in inAppMessages) {
+        if ([[inAppMessage idMessage] isEqualToString: messageId]) {
+            [[SMManager sharedInstance] setInAppMessageAsSeen: inAppMessage];
+            [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
+            return;
+        }
+    }
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: [NSString stringWithFormat:@"No message with id %@ found", messageId]] callbackId:command.callbackId];
+
+}
+
+- (void)executeButtonAction:(CDVInvokedUrlCommand *)command {
+    NSString *buttonId = command.arguments[0];
+    NSString *messageId = command.arguments[1];
+    NSArray *inAppMessages = [[SMManager sharedInstance] getInAppMessages];
+    for (SMInAppMessage *inAppMessage in inAppMessages) {
+        if ([[inAppMessage idMessage] isEqualToString: messageId]) {
+            for (SMLink *link in [inAppMessage arrayIAMLinks]) {
+                if ([[link idButtonData] isEqualToString: buttonId]) {
+                    [[SMManager sharedInstance] executeLinkAction: link InAppMessage:inAppMessage];
+                    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
+                    return;
+                }
+            }
+            [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @("buttonId does not exist in message.")] callbackId:command.callbackId];
+            return;
+        }
+    }
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: [NSString stringWithFormat:@"No message with id %@ found", messageId]] callbackId:command.callbackId];
+}
+
 - (void)currentAuthorisationStatus:(CDVInvokedUrlCommand *)command {
     SMLocationAuthorisationStatus smLocationAuthStatus = [[SMManager sharedInstance] currentAuthorisationStatus];
     NSInteger result = [[EnumMapper sharedEnumMapper] locationAuthorisationStatusForSMLocationAuthorisationStatus:smLocationAuthStatus];;

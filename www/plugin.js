@@ -9,11 +9,15 @@ var SELLIGENT_PLUGIN = "SelligentPlugin";
 var VERSION_LIB = "versionLib";
 var RELOAD = "reload";
 var SEND_DEVICE_INFO = "sendDeviceInfo";
+var GET_IN_APP_MESSAGES = "getInAppMessages";
 var ENABLE_GEOLOCATION = "enableGeolocation";
 var IS_GEOLOCATION_ENABLED = "isGeolocationEnabled";
 var ENABLE_NOTIFICATIONS = "enableNotifications";
 var DISPLAY_LAST_RECEIVED_REMOTE_PUSH_NOTIFICATION = "displayLastReceivedRemotePushNotification";
 var GET_LAST_REMOTE_PUSH_NOTIFICATION = "getLastRemotePushNotification";
+var GET_IN_APP_MESSAGES = "getInAppMessages";
+var SET_IN_APP_MESSAGE_AS_SEEN = "setInAppMessageAsSeen";
+var EXECUTE_BUTTON_ACTION = "executeButtonAction";
 
 /**
  * @exports Selligent
@@ -165,6 +169,22 @@ Selligent.loadSettings = function (successCallback, errorCallback) {
     }
 };
 
+
+/**
+ * Get in app messages.
+ *  
+ * @param {function} successCallback Callback function on success.
+ * @param {function} errorCallback Callback function on error.
+ */
+Selligent.getInAppMessages = function (successCallback, errorCallback) {
+	cordova.exec(
+		successCallback,
+		errorCallback,
+		SELLIGENT_PLUGIN,
+        GET_IN_APP_MESSAGES
+	)
+}
+
 /**
  * Enable/disable geolocation.
  *  
@@ -266,4 +286,65 @@ Selligent.getLastRemotePushNotification = function (successCallback, errorCallba
         GET_LAST_REMOTE_PUSH_NOTIFICATION
     );
 };
+
+/**
+ * Get all in app messages
+ *  
+ * @param {function} successCallback Callback function on success.
+ * @param {function} errorCallback Callback function on error.
+ * @returns {object} Returns all in app messages and additional information.
+ */
+Selligent.getInAppMessages = function (successCallback, errorCallback) {
+    // check that callbacks are functions
+    argscheck.checkArgs('FF', 'Selligent.getInAppMessages', arguments);
+
+    cordova.exec(
+        successCallback,
+        errorCallback,
+        SELLIGENT_PLUGIN,
+        GET_IN_APP_MESSAGES
+    );
+};
+
+/**
+ * Set in app message as seen
+ *  
+ * @param {function} successCallback Callback function on success.
+ * @param {function} errorCallback Callback function on error.
+ * @param {string} messageId Message id to identify the message which has been seen.
+ */
+Selligent.setInAppMessageAsSeen = function (successCallback, errorCallback, messageId) {
+    // check that callbacks are functions
+    argscheck.checkArgs('FF', 'Selligent.setInAppMessageAsSeen', arguments);
+
+    cordova.exec(
+        successCallback,
+        errorCallback,
+        SELLIGENT_PLUGIN,
+        SET_IN_APP_MESSAGE_AS_SEEN,
+        [messageId]
+    );
+};
+
+/**
+ * Execute action on button
+ *  
+ * @param {function} successCallback Callback function on success.
+ * @param {function} errorCallback Callback function on error.
+ * @param {string} messageId Message id to identify the message.
+ * @param {string} buttonId Button id to identify the message.
+ */
+Selligent.executeButtonAction = function (successCallback, errorCallback, buttonId, messageId) {
+    // check that callbacks are functions
+    argscheck.checkArgs('FF', 'Selligent.executeButtonAction', arguments);
+
+    cordova.exec(
+        successCallback,
+        errorCallback,
+        SELLIGENT_PLUGIN,
+        EXECUTE_BUTTON_ACTION,
+        [buttonId, messageId]
+    );
+};
+
 module.exports = Selligent;
