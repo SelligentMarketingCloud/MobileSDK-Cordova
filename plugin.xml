@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin
-    xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="2.1.0">
+        xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="2.1.1">
     <name>Selligent Cordova</name>
     <description>Cordova bridge for the Selligent SDK</description>
     <license>MIT</license>
@@ -139,6 +139,9 @@
         <header-file src="src/ios/frameworks/include/SMInAppContentType.h" />
         <header-file src="src/ios/frameworks/include/SMInAppContentURLViewController.h" />
         <header-file src="src/ios/frameworks/include/SMInAppContentViewController.h" />
+        <header-file src="src/ios/frameworks/include/SMInAppMessage.h" />
+        <header-file src="src/ios/frameworks/include/SMInAppMessageType.h" />
+        <header-file src="src/ios/frameworks/include/SMNotificationAnnotationData.h" />
         <header-file src="src/ios/frameworks/include/SMInAppRefreshType.h" />
         <header-file src="src/ios/frameworks/include/SMLink.h" />
         <header-file src="src/ios/frameworks/include/SMLocationAuthorisationType.h" />
