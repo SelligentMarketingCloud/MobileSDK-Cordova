@@ -218,17 +218,22 @@ public class SelligentPlugin extends CordovaPlugin {
 
                         JSONArray buttonsJSONArray = new JSONArray();
 
-                        for(SMNotificationButton button : message.getButtons()) {
-                            JSONObject buttonsJSONObject = new JSONObject();
+                        SMNotificationButton buttons[] = message.getButtons();
 
-                            buttonsJSONObject.put("id", button.id);
-                            buttonsJSONObject.put("value", button.value);
-                            buttonsJSONObject.put("label", button.label);
-                            buttonsJSONObject.put("action", button.action);
-                            buttonsJSONObject.put("type", button.type);
+                        if(buttons != null) {
+                            for(SMNotificationButton button : buttons) {
+                                JSONObject buttonsJSONObject = new JSONObject();
 
-                            buttonsJSONArray.put(buttonsJSONObject);
+                                buttonsJSONObject.put("id", button.id);
+                                buttonsJSONObject.put("value", button.value);
+                                buttonsJSONObject.put("label", button.label);
+                                buttonsJSONObject.put("action", button.action);
+                                buttonsJSONObject.put("type", button.type);
+
+                                buttonsJSONArray.put(buttonsJSONObject);
+                            }
                         }
+
                         messageJSONObject.put("buttons", buttonsJSONArray);
 
                         iamJSONArray.put(messageJSONObject);

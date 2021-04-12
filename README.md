@@ -88,6 +88,8 @@ For remote push notifications, follow section 4 **Configure the APNS (Apple Push
 If you want rich push notifications, follow section 6.9 **Notification Extensions** as well.  
 Make sure you add your `appGroupId` to the `selligent.json`.
 
+> **IMPORTANT!** make sure your `appGroupId` has the following structure or it will not work: `group.{MAIN_APP_BUNDLE_ID}`
+
 For geolocation services, follow section 6.5 **Geolocation**, of the **IOS - Using the SDK** pdf. You also need to configure several permissions described in 5.3.3 **Permission for geo location**.
 
 ## Using the API

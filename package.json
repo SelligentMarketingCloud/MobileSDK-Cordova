@@ -1,6 +1,6 @@
 {
   "name": "@selligent-marketing-cloud/selligent-cordova",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Cordova bridge for Selligent SDK",
   "cordova": {
     "id": "selligent-cordova",

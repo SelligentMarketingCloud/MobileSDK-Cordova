@@ -280,7 +280,7 @@ Selligent.areNotificationsEnabled = function (successCallback, errorCallback) {
  *
  * @param {function} successCallback Callback function on success.
  * @param {function} errorCallback Callback function on error.
- * @param {string} iconName Id of the message.
+ * @param {string} iconName Name of the icon.
  */
 Selligent.setNotificationSmallIcon = function (successCallback, errorCallback, iconName) {
 	// check that callbacks are functions
@@ -306,7 +306,7 @@ Selligent.setNotificationSmallIcon = function (successCallback, errorCallback, i
  *
  * @param {function} successCallback Callback function on success.
  * @param {function} errorCallback Callback function on error.
- * @param {string} iconName Id of the message.
+ * @param {string} iconName Name of the icon.
  */
 Selligent.setNotificationLargeIcon = function (successCallback, errorCallback, iconName) {
 	// check that callbacks are functions
