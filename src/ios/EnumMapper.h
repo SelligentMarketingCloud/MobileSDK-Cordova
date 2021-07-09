@@ -1,9 +1,6 @@
 #import "LogLevel.h"
 #import "InAppMessageRefreshType.h"
-#import "LocationAuthorisationStatus.h"
-#import "LocationAuthorisationType.h"
 #import "ClearCacheInterval.h"
-#import "SMLocationAuthorisationType.h"
 #import "SMLog.h"
 #import "SMClearCache.h"
 #import "SMInAppRefreshType.h"
@@ -22,12 +19,6 @@
 
 - (SMInAppRefreshType)smInAppRefreshTypeForInAppMessageRefreshType:(InAppMessageRefreshType)inAppMessageRefreshType;
 - (InAppMessageRefreshType)inAppMessageRefreshTypeForSMInAppRefreshType:(SMInAppRefreshType)smInAppRefreshType;
-
-- (SMLocationAuthorisationStatus)smLocationAuthorisationStatusForLocationAuthorisationStatus:(LocationAuthorisationStatus)locationAuthorisationStatus;
-- (LocationAuthorisationStatus)locationAuthorisationStatusForSMLocationAuthorisationStatus:(SMLocationAuthorisationStatus)smLocationAuthorisationType;
-
-- (SMLocationAuthorisationType)smLocationAuthorisationTypeForLocationAuthorisationType:(LocationAuthorisationType)locationAuthorisationType;
-- (LocationAuthorisationType)locationAuthorisationTypeForSMLocationAuthorisationType:(SMLocationAuthorisationType)smLocationAuthorisationType;
 
 - (UIBackgroundFetchResult)uiBackgroundFetchResultForBackgroundFetchResult:(BackgroundFetchResult)backgroundFetchResult;
 - (BackgroundFetchResult)backgroundFetchResultForUIBackgroundFetchResult:(UIBackgroundFetchResult)uiBackgroundFetchResult;

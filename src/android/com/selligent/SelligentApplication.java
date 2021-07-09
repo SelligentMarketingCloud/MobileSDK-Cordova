@@ -1,5 +1,6 @@
 package com.selligent;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
@@ -32,7 +33,7 @@ public class SelligentApplication extends MultiDexApplication {
             final Settings settings = Settings.fromJSONObject(loadSettingsFromJSON());
             final SMSettings smSettings = SMSettingsFactory.getSMSettings(settings);
             final SMManager smManager = SMManager.getInstance();
-            SMManager.NOTIFICATION_ACTIVITY = Class.forName(settings.getActivityName());
+            SMManager.NOTIFICATION_ACTIVITY = (Class<? extends Activity>) Class.forName(settings.getActivityName());
 
             smManager.start(smSettings, this);
 

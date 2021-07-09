@@ -84,12 +84,6 @@ exports.defineAutoTests = function () {
             expect(window.Selligent.iOSLocationAuthorisationStatus.GRANTED_ALWAYS).toBe(73);
         });
 
-        it('should contain "iOSLocationAuthorisationType" constants that are defined', function () {
-            expect(window.Selligent.iOSLocationAuthorisationType).toBeDefined();
-            expect(window.Selligent.iOSLocationAuthorisationType.IN_USE).toBe(80);
-            expect(window.Selligent.iOSLocationAuthorisationType.ALWAYS).toBe(81);
-        });
-
         it('should contain "EventType" constants that are defined', function () {
             expect(window.Selligent.EventType).toBeDefined();
             expect(window.Selligent.EventType.USER_REGISTER).toBe(90);

@@ -9,7 +9,6 @@ class SMSettingsFactory {
         smSettings.WebServiceUrl = settings.getUrl();
         smSettings.ClientId = settings.getClientId();
         smSettings.PrivateKey = settings.getPrivateKey();
-        smSettings.GoogleApplicationId = settings.getGoogleApplicationId();
         smSettings.ConfigureGeolocation = settings.getConfigureLocationServices();
 
         final Boolean doNotFetchTheToken = settings.getDoNotFetchTheToken();
@@ -25,6 +24,11 @@ class SMSettingsFactory {
         final Boolean loadCacheAsynchronously = settings.getLoadCacheAsynchronously();
         if (loadCacheAsynchronously != null) {
             smSettings.LoadCacheAsynchronously = loadCacheAsynchronously;
+        }
+
+        final Boolean addInAppMessageFromPushToInAppMessageList = settings.getAddInAppMessageFromPushToInAppMessageList();
+        if(addInAppMessageFromPushToInAppMessageList != null) {
+            smSettings.AddInAppMessageFromPushToInAppMessageList = addInAppMessageFromPushToInAppMessageList;
         }
 
         final ClearCacheIntervalValue clearCacheIntervalValue = settings.getClearCacheIntervalValue();

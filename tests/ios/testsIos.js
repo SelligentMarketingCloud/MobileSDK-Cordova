@@ -18,8 +18,6 @@ exports.defineAutoTests = function () {
 
     var APPLY_LOG_LEVEL = "applyLogLevel";
     var ENABLE_IN_APP_MESSAGES = "enableInAppMessages";
-    var CURRENT_AUTH_STATUS = "currentAuthorisationStatus";
-    var REQUEST_LOCATION_AUTH = "requestLocationAuthorisation";
     var SEND_EVENT = "sendEvent";
     var SUBSCRIBE_TO_EVENTS = "subscribeToEvents";
     var DISPLAY_NOTIFICATION = "displayNotification";
@@ -35,11 +33,6 @@ exports.defineAutoTests = function () {
         it('should contain a "enableInAppMessages" function', function () {
             expect(typeof window.Selligent.enableInAppMessages).toBeDefined();
             expect(typeof window.Selligent.enableInAppMessages === 'function').toBe(true);
-        });
-
-        it('should contain a "currentAuthorisationStatus" function', function () {
-            expect(typeof window.Selligent.currentAuthorisationStatus).toBeDefined();
-            expect(typeof window.Selligent.currentAuthorisationStatus === 'function').toBe(true);
         });
 
         it('should contain a "requestLocationAuthorisation" function', function () {
@@ -134,62 +127,6 @@ exports.defineAutoTests = function () {
         });
         it('should return an error on insufficient arguments', function () {
             Selligent.enableInAppMessages(
-                success,
-                error
-            );
-            expect(cordova.exec).not.toHaveBeenCalled();
-        });
-    });
-
-    describe('currentAuthorisationStatus', function () {
-        beforeEach(function () {
-            spyOn(cordova, 'exec').and.callFake(function (successCallback, errorCallback, pluginName, methodName, args) {
-                successCallback("successful");
-            });
-        });
-        afterEach(function () {
-            cordova.exec.calls.reset();
-        });
-
-        it('should be successful with valid passed arguments', function () {
-            Selligent.currentAuthorisationStatus(
-                success,
-                error
-            );
-            expect(cordova.exec).toHaveBeenCalledWith(success, error, SELLIGENT_PLUGIN, CURRENT_AUTH_STATUS);
-        });
-    });
-
-    describe('requestLocationAuthorisation', function () {
-        beforeEach(function () {
-            spyOn(cordova, 'exec').and.callFake(function (successCallback, errorCallback, pluginName, methodName, args) {
-                successCallback("successful");
-            });
-        });
-        afterEach(function () {
-            cordova.exec.calls.reset();
-        });
-
-        it('should be successful with valid passed arguments', function () {
-            Selligent.requestLocationAuthorisation(
-                success,
-                error,
-                Selligent.iOSLocationAuthorisationType.IN_USE
-            );
-            expect(cordova.exec).toHaveBeenCalledWith(success, error, SELLIGENT_PLUGIN, REQUEST_LOCATION_AUTH, [Selligent.iOSLocationAuthorisationType.IN_USE]);
-        });
-        it('should throw an error on incorrect typeof passed argument', function () {
-            expect(function () {
-                Selligent.requestLocationAuthorisation(
-                    success,
-                    error,
-                    "faulty argument" // expecting a number here 
-                );
-            }).toThrow();
-            expect(cordova.exec).not.toHaveBeenCalled();
-        });
-        it('should return an error on insufficient arguments', function () {
-            Selligent.requestLocationAuthorisation(
                 success,
                 error
             );

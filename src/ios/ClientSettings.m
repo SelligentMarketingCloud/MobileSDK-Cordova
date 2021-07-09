@@ -8,6 +8,7 @@
 @property (nonatomic, strong) NSString *clientId;
 @property (nonatomic, strong) NSString *privateKey;
 @property (nonatomic, strong) NSString *appGroupId;
+@property (nonatomic, strong) NSNumber *addInAppMessageFromPushToInAppMessageList;
 @property (nonatomic, strong) NSNumber *shouldClearBadge;
 @property (nonatomic, strong) NSNumber *shouldDisplayRemoteNotification;
 @property (nonatomic, strong) NSNumber *configureLocationServices;
@@ -24,6 +25,7 @@
     clientSettings.clientId = dictionary[@"clientId"];
     clientSettings.privateKey = dictionary[@"privateKey"];
     clientSettings.appGroupId = dictionary[@"appGroupId"];
+    clientSettings.addInAppMessageFromPushToInAppMessageList = dictionary[@"addInAppMessageFromPushToInAppMessageList"];
     clientSettings.shouldClearBadge = dictionary[@"shouldClearBadge"];
     clientSettings.shouldDisplayRemoteNotification = dictionary[@"shouldDisplayRemoteNotification"];
     clientSettings.configureLocationServices = dictionary[@"configureLocationServices"];

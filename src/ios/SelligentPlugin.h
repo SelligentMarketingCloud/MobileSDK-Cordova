@@ -8,7 +8,6 @@
 - (void)versionLib:(CDVInvokedUrlCommand*)command;
 - (void)applyLogLevel:(CDVInvokedUrlCommand*)command;
 - (void)enableInAppMessages:(CDVInvokedUrlCommand*)command;
-- (void)currentAuthorisationStatus:(CDVInvokedUrlCommand*)command;
 - (void)requestLocationAuthorisation:(CDVInvokedUrlCommand*)command;
 - (void)isGeolocationEnabled:(CDVInvokedUrlCommand*)command;
 - (void)enableGeolocation:(CDVInvokedUrlCommand*)command;
@@ -16,6 +15,7 @@
 - (void)sendEvent:(CDVInvokedUrlCommand*)command;
 - (void)registerRemoteNotificationFetchCompletionHandler:(CDVInvokedUrlCommand *)command;
 - (void)forceRemoteNotificationBackgroundFetchResult:(CDVInvokedUrlCommand *)command;
+- (void)getDeviceId:(CDVInvokedUrlCommand*)command;
 - (void)enableNotifications:(CDVInvokedUrlCommand *)command;
 - (void)displayLastReceivedRemotePushNotification:(CDVInvokedUrlCommand *)command;
 - (void)getLastRemotePushNotification:(CDVInvokedUrlCommand *)command;

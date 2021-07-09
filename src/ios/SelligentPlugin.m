@@ -23,6 +23,7 @@ static NSString * const BROADCAST_BUTTON_CLICKED = @"ButtonClicked";
 static NSString * const BROADCAST_RECEIVED_IN_APP_MSG = @"ReceivedInAppMessage";
 static NSString * const BROADCAST_WILL_DISPLAY_NOTIFICATION = @"WillDisplayNotification";
 static NSString * const BROADCAST_WILL_DISMISS_NOTIFICATION = @"WillDismissNotification";
+static NSString * const BROADCAST_RECEIVED_DEVICE_ID = @"ReceivedDeviceId";
 static NSString * const BROADCAST_RECEIVEDREMOTENOTIFICATION = @"ReceivedRemoteNotification";
 
 @implementation SelligentPlugin {
@@ -43,6 +44,7 @@ static NSString * const BROADCAST_RECEIVEDREMOTENOTIFICATION = @"ReceivedRemoteN
     [self _addOrReplaceObserverForSelector:@selector(_handleButtonClicked:) forName:kSMNotification_Event_ButtonClicked];
     [self _addOrReplaceObserverForSelector:@selector(_handleWillDisplayNotification:) forName:kSMNotification_Event_WillDisplayNotification];
     [self _addOrReplaceObserverForSelector:@selector(_handleWillDismissNotification:) forName:kSMNotification_Event_WillDismissNotification];
+    [self _addOrReplaceObserverForSelector:@selector(_handleReceivedDeviceId:) forName:kSMNotification_Data_DeviceId];
     [self _addOrReplaceObserverForSelector:@selector(_handleDidReceiveRemoteNotification:) forName:kSMNotification_Event_DidReceiveRemoteNotification];
 }
 
@@ -101,6 +103,7 @@ static NSString * const BROADCAST_RECEIVEDREMOTENOTIFICATION = @"ReceivedRemoteN
             @"creationDate" : @([[inAppMessage creationDate] timeIntervalSince1970]),
             @"expirationDate" : [inAppMessage expirationDate] ? @([[inAppMessage expirationDate] timeIntervalSince1970]) : [NSNull null],
             @"hasBeenSeen" : @([inAppMessage isViewed]),
+            @"type" : @([inAppMessage iamType]),
             @"buttons" : mappedLinks
         }];
     }
@@ -139,19 +142,6 @@ static NSString * const BROADCAST_RECEIVEDREMOTENOTIFICATION = @"ReceivedRemoteN
         }
     }
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: [NSString stringWithFormat:@"No message with id %@ found", messageId]] callbackId:command.callbackId];
-}
-
-- (void)currentAuthorisationStatus:(CDVInvokedUrlCommand *)command {
-    SMLocationAuthorisationStatus smLocationAuthStatus = [[SMManager sharedInstance] currentAuthorisationStatus];
-    NSInteger result = [[EnumMapper sharedEnumMapper] locationAuthorisationStatusForSMLocationAuthorisationStatus:smLocationAuthStatus];;
-    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsNSInteger:result] callbackId:command.callbackId];
-}
-
-- (void)requestLocationAuthorisation:(CDVInvokedUrlCommand *)command {
-    NSNumber *iOSAuthTypeAsNumber = command.arguments[0];
-    SMLocationAuthorisationType smAuthType = [[EnumMapper sharedEnumMapper] smLocationAuthorisationTypeForLocationAuthorisationType:iOSAuthTypeAsNumber.integerValue];
-    [[SMManager sharedInstance] requestLocationAuthorisation:smAuthType];
-    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
 - (void)isGeolocationEnabled:(CDVInvokedUrlCommand *)command {
@@ -210,6 +200,11 @@ static NSString * const BROADCAST_RECEIVEDREMOTENOTIFICATION = @"ReceivedRemoteN
         [pluginResult setKeepCallbackAsBool:YES];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:_remoteNotificationFetchCompletionHandlerCallbackId];
     }
+}
+
+- (void)getDeviceId:(CDVInvokedUrlCommand *)command {
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[SMManager sharedInstance].deviceID];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)enableNotifications:(CDVInvokedUrlCommand *)command {
@@ -290,6 +285,15 @@ static NSString * const BROADCAST_RECEIVEDREMOTENOTIFICATION = @"ReceivedRemoteN
 
 - (void)_handleWillDismissNotification:(NSNotification*)notification {
     [self _sendBroadcastEventResultWithData:nil andType:BROADCAST_WILL_DISMISS_NOTIFICATION];
+}
+
+- (void)_handleReceivedDeviceId:(NSNotification*)notification {
+    NSDictionary *dict = [notification userInfo];
+    NSString *deviceId = [dict objectForKey:kSMNotification_Data_DeviceId];
+    NSDictionary *data = @{
+        @"deviceId": deviceId
+    };
+    [self _sendBroadcastEventResultWithData:data andType:BROADCAST_RECEIVED_DEVICE_ID];
 }
 
 - (void)_sendBroadcastEventResultWithData:(NSDictionary *)data andType:(NSString *)type {

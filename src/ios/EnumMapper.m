@@ -4,8 +4,6 @@
     NSDictionary *_logLevelEnumMapping;
     NSDictionary *_clearCacheIntervalEnumMapping;
     NSDictionary *_inAppRefreshTypeEnumMapping;
-    NSDictionary *_locationAuthorisationStatusMapping;
-    NSDictionary *_locationAuthorisationTypeMapping;
     NSDictionary *_backgroundFetchResult;
     NSDictionary *_notificationButtonTypeMapping;
 }
@@ -43,16 +41,6 @@
                                          @(iamrtHour) : @(kSMIA_RefreshType_Hourly),
                                          @(iamryDay ) : @(kSMIA_RefreshType_Daily),
                                          };
-        _locationAuthorisationStatusMapping = @{
-                                                @(ilasUnknown) : @(kSMLocationAuthorisationStatus_Unknown),
-                                                @(ilasRefused) : @(kSMLocationAuthorisationStatus_Refused),
-                                                @(ilasGrantedInUse) : @(kSMLocationAuthorisationStatus_GrantedInUse),
-                                                @(ilasGrantedAlways) : @(kSMLocationAuthorisationStatus_GrantedAlways),
-                                                };
-        _locationAuthorisationTypeMapping = @{
-                                              @(ilatInUse) : @(kSMLocationAuthorisationType_InUse),
-                                              @(ilatAlways) : @(kSMLocationAuthorisationType_Always),
-                                              };
         _backgroundFetchResult = @{
                                    @(bfrNewData) : @(UIBackgroundFetchResultNewData),
                                    @(bfrNoData) : @(UIBackgroundFetchResultNoData),
@@ -101,24 +89,6 @@
 
 - (InAppMessageRefreshType)inAppMessageRefreshTypeForSMInAppRefreshType:(SMInAppRefreshType)smInAppRefreshType {
     return (InAppMessageRefreshType) ((NSNumber *)[_inAppRefreshTypeEnumMapping allKeysForObject:@(smInAppRefreshType)].firstObject).integerValue;
-}
-
-
-- (SMLocationAuthorisationStatus)smLocationAuthorisationStatusForLocationAuthorisationStatus:(LocationAuthorisationStatus)locationAuthorisationStatus {
-    return (SMLocationAuthorisationStatus) ((NSNumber *)_locationAuthorisationStatusMapping[@(locationAuthorisationStatus)]).integerValue;
-}
-
-- (LocationAuthorisationStatus)locationAuthorisationStatusForSMLocationAuthorisationStatus:(SMLocationAuthorisationStatus)smLocationAuthorisationType {
-    return (LocationAuthorisationStatus) ((NSNumber *)[_locationAuthorisationStatusMapping allKeysForObject:@(smLocationAuthorisationType)].firstObject).integerValue;
-}
-
-
-- (SMLocationAuthorisationType)smLocationAuthorisationTypeForLocationAuthorisationType:(LocationAuthorisationType)locationAuthorisationType {
-    return (SMLocationAuthorisationType) ((NSNumber *)_locationAuthorisationTypeMapping[@(locationAuthorisationType)]).integerValue;
-}
-
-- (LocationAuthorisationType)locationAuthorisationTypeForSMLocationAuthorisationType:(SMLocationAuthorisationType)smLocationAuthorisationType {
-    return (LocationAuthorisationType) ((NSNumber *)[_locationAuthorisationTypeMapping allKeysForObject:@(smLocationAuthorisationType)].firstObject).integerValue;
 }
 
 - (UIBackgroundFetchResult)uiBackgroundFetchResultForBackgroundFetchResult:(BackgroundFetchResult)backgroundFetchResult {

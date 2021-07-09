@@ -43,6 +43,11 @@
     if(clearCacheIntervalValueAsNumber) {
         settings.clearCacheIntervalValue = [[EnumMapper sharedEnumMapper] smClearCacheForClearCacheInterval:clearCacheIntervalValueAsNumber.integerValue]; //((SMClearCache) );
     }
+    
+    NSNumber *addInAppMessageFromPushToInAppMessageList = clientSettings.addInAppMessageFromPushToInAppMessageList;
+    if(addInAppMessageFromPushToInAppMessageList) {
+        settings.shouldAddInAppMessageFromPushToInAppMessageList = addInAppMessageFromPushToInAppMessageList.boolValue;
+    }
 }
 
 + (SMManagerSettingIAM *)_iamManagerSettingsFor:(ClientSettings *)clientSettings {

@@ -33,16 +33,6 @@ export namespace iOSBackgroundFetchResult {
   const NO_DATA: number;
   const FAILED: number;
 }
-export namespace iOSLocationAuthorisationStatus {
-  const UNKNOWN: number;
-  const REFUSED: number;
-  const GRANTED_IN_USE: number;
-  const GRANTED_ALWAYS: number;
-}
-export namespace iOSLocationAuthorisationType {
-  const IN_USE: number;
-  const ALWAYS: number;
-}
 export namespace EventType {
   const USER_REGISTER: number;
   const USER_UNREGISTER: number;
@@ -69,6 +59,7 @@ export namespace BroadcastEventType {
   const RECEIVED_IN_APP_MESSAGE: string;
   const WILL_DISPLAY_NOTIFICATION: string;
   const WILL_DISMISS_NOTIFICATION: string;
+  const  RECEIVED_DEVICE_ID: string;
   namespace Android {
     const RECEIVED_GCM_TOKEN: string;
   }

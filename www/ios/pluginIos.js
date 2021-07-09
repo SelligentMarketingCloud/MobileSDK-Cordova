@@ -8,8 +8,6 @@ var SELLIGENT_PLUGIN = "SelligentPlugin";
 // METHOD VARS
 var APPLY_LOG_LEVEL = "applyLogLevel";
 var ENABLE_IN_APP_MESSAGES = "enableInAppMessages";
-var CURRENT_AUTH_STATUS = "currentAuthorisationStatus";
-var REQUEST_LOCATION_AUTH = "requestLocationAuthorisation";
 var SEND_EVENT = "sendEvent";
 var SUBSCRIBE_TO_EVENTS = "subscribeToEvents";
 var DISPLAY_NOTIFICATION = "displayNotification";
@@ -76,51 +74,6 @@ Selligent.enableInAppMessages = function (successCallback, errorCallback, enable
         SELLIGENT_PLUGIN,
         ENABLE_IN_APP_MESSAGES,
         [enabled]
-    );
-};
-
-/**
- * Get Current AuthorisationStatus.
- *  
- * @param {function} successCallback Callback passing iOSLocationAuthorisationStatus.
- * @param {function} errorCallback Callback function on error.
- * @returns Returns the current authorisation status.
- */
-Selligent.currentAuthorisationStatus = function (successCallback, errorCallback) {
-    // check that callbacks are functions
-    argscheck.checkArgs('FF', 'Selligent.currentAuthorisationStatus', arguments);
-
-    cordova.exec(
-        successCallback,
-        errorCallback,
-        SELLIGENT_PLUGIN,
-        CURRENT_AUTH_STATUS
-    );
-};
-
-/**
- * Request Location Authorisation.
- *  
- * @param {function} successCallback Callback function on success.
- * @param {function} errorCallback Callback function on error.
- * @param {iOSLocationAuthorisationType} iOSLocationAuthorisationType Requested authorisation type.
- * @returns Returns the requested location authorisation.
- */
-Selligent.requestLocationAuthorisation = function (successCallback, errorCallback, iOSLocationAuthorisationType) {
-    // check that iOSLocationAuthorisationType is a number and callbacks are functions
-    argscheck.checkArgs('FFN', 'Selligent.requestLocationAuthorisation', arguments);
-
-    if (!SelligentHelpers.typeMatches(iOSLocationAuthorisationType, "number") || !SelligentHelpers.constantIsValid(SelligentConstants.iOSLocationAuthorisationType, iOSLocationAuthorisationType)) {
-        errorCallback(SelligentHelpers.WRONG_ARGUMENTS + " " + "Expected a value of Selligent constant enum \"iOSLocationAuthorisationType\"." + " " + SelligentHelpers.MORE_INFORMATION);
-        return;
-    }
-
-    cordova.exec(
-        successCallback,
-        errorCallback,
-        SELLIGENT_PLUGIN,
-        REQUEST_LOCATION_AUTH,
-        [iOSLocationAuthorisationType]
     );
 };
 

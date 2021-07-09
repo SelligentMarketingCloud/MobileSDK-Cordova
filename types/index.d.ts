@@ -29,6 +29,10 @@ export function isGeolocationEnabled(
   successCallback: Function,
   errorCallback: Function
 ): boolean;
+export function getDeviceId(
+  successCallback: Function,
+  errorCallback: Function
+): string;
 export function enableNotifications(
   successCallback: Function,
   errorCallback: Function,
@@ -63,15 +67,6 @@ export function enableInAppMessages(
   successCallback: Function,
   errorCallback: Function,
   enabled: boolean
-): void;
-export function currentAuthorisationStatus(
-  successCallback: Function,
-  errorCallback: Function
-): void;
-export function requestLocationAuthorisation(
-  successCallback: Function,
-  errorCallback: Function,
-  iOSLocationAuthorisationType: any
 ): void;
 export function sendEvent(
   successCallback: Function,

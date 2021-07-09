@@ -1,22 +1,12 @@
 package com.selligent;
 
-import org.apache.cordova.CordovaInterface;
-import org.apache.cordova.CordovaPlugin;
-import org.apache.cordova.CallbackContext;
-
-import org.apache.cordova.CordovaWebView;
-import org.apache.cordova.LOG;
-import org.apache.cordova.PluginResult;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.util.Log;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.selligent.sdk.SMCallback;
 import com.selligent.sdk.SMDeviceInfos;
@@ -28,6 +18,15 @@ import com.selligent.sdk.SMManager;
 import com.selligent.sdk.SMNotificationButton;
 import com.selligent.sdk.SMRemoteMessageDisplayType;
 import com.selligent.sdk.SMSettings;
+
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaWebView;
+import org.apache.cordova.PluginResult;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,6 +51,7 @@ public class SelligentPlugin extends CordovaPlugin {
     private static final String ENABLE_GEOLOCATION = "enableGeolocation";
     private static final String IS_GEOLOCATION_ENABLED = "isGeolocationEnabled";
     private static final String SEND_EVENT = "sendEvent";
+    private static final String GET_DEVICE_ID = "getDeviceId";
     private static final String ENABLE_NOTIFICATIONS = "enableNotifications";
     private static final String ARE_NOTIFICATIONS_ENABLED = "areNotificationsEnabled";
     private static final String DISPLAY_LAST_RECEIVED_REMOTE_PUSH_NOTIFICATION = "displayLastReceivedRemotePushNotification";
@@ -104,6 +104,8 @@ public class SelligentPlugin extends CordovaPlugin {
                 return isGeolocationEnabled(callbackContext);
             case SEND_EVENT:
                 return sendEvent(args, callbackContext);
+            case GET_DEVICE_ID:
+                return getDeviceId(callbackContext);
             case ENABLE_NOTIFICATIONS:
                 return enableNotifications(args, callbackContext);
             case ARE_NOTIFICATIONS_ENABLED:
@@ -215,6 +217,7 @@ public class SelligentPlugin extends CordovaPlugin {
                         messageJSONObject.put("expirationDate", message.getExpirationDate());
                         messageJSONObject.put("receptionDate", message.getReceptionDate());
                         messageJSONObject.put("hasBeenSeen", message.hasBeenSeen());
+                        messageJSONObject.put("type", message.getType());
 
                         JSONArray buttonsJSONArray = new JSONArray();
 
@@ -329,6 +332,11 @@ public class SelligentPlugin extends CordovaPlugin {
         });
 
         smManager.sendSMEvent(smEvent);
+        return true;
+    }
+
+    private boolean getDeviceId(CallbackContext callbackContext) {
+        callbackContext.success(smManager.getDeviceId());
         return true;
     }
 

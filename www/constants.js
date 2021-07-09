@@ -27,6 +27,20 @@ module.exports = {
     },
     /**
      * @description
+     * Defines the in-app message type.
+     */
+     InAppMessageType: {
+        UNKNOWN = -2,
+        HIDDEN = -1,
+        ALERT = 0,
+        HTML = 1,
+        URL = 2,
+        IMAGE = 3,
+        MAP = 4,
+        PASSBOOK = 5,
+    },
+    /**
+     * @description
      * Defines how often the SDK must retrieve the in-app messages.
      */
     InAppMessageRefreshType: {
@@ -82,30 +96,6 @@ module.exports = {
         NO_DATA: 61,
         /** Background fetch failed */
         FAILED: 62
-    },
-    /**
-     * @description
-     * Description of the possible status of use of location services on a device.
-     */
-    iOSLocationAuthorisationStatus: {
-        /** Status of use of location services is unknown */
-        UNKNOWN: 70,
-        /** Use of location services is refused */
-        REFUSED: 71,
-        /** Use of location services is granted when in use */
-        GRANTED_IN_USE: 72,
-        /** Use of location services is always granted */
-        GRANTED_ALWAYS: 73
-    },
-    /**
-     * @description
-     * Defines the level of request for the authorisation of usage of location services on a device.
-     */
-    iOSLocationAuthorisationType: {
-        /** Request authorisation when in location services are in use */
-        IN_USE: 80,
-        /** Always request the authorisation of the location services */
-        ALWAYS: 81
     },
     /**
      * @description
@@ -166,6 +156,8 @@ module.exports = {
         WILL_DISPLAY_NOTIFICATION: "WillDisplayNotification",
         /** A notification will be dismissed */
         WILL_DISMISS_NOTIFICATION: "WillDismissNotification",
+        /** A device id has been received */
+        RECEIVED_DEVICE_ID: "ReceivedDeviceId",
         /** Android specific values */
         Android: {
             /** A GCM token has been received */

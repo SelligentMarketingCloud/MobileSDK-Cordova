@@ -12,6 +12,7 @@ var SEND_DEVICE_INFO = "sendDeviceInfo";
 var GET_IN_APP_MESSAGES = "getInAppMessages";
 var ENABLE_GEOLOCATION = "enableGeolocation";
 var IS_GEOLOCATION_ENABLED = "isGeolocationEnabled";
+var GET_DEVICE_ID = "getDeviceId";
 var ENABLE_NOTIFICATIONS = "enableNotifications";
 var DISPLAY_LAST_RECEIVED_REMOTE_PUSH_NOTIFICATION = "displayLastReceivedRemotePushNotification";
 var GET_LAST_REMOTE_PUSH_NOTIFICATION = "getLastRemotePushNotification";
@@ -225,6 +226,26 @@ Selligent.isGeolocationEnabled = function (successCallback, errorCallback) {
         errorCallback,
         SELLIGENT_PLUGIN,
         IS_GEOLOCATION_ENABLED
+    );
+};
+
+/**
+ * Returns the device Id.
+ * 
+ * @param {function} successCallback Callback function on success.
+ * @param {function} errorCallback Callback function on error.
+ * @returns {string} Returns the version of the underlying Selligent SDK.
+ */
+ Selligent.getDeviceId = function (successCallback, errorCallback) {
+    // check that callbacks are functions
+    // for more information see https://github.com/apache/cordova-js/blob/master/src/common/argscheck.js
+    argscheck.checkArgs('FF', 'Selligent.getDeviceId', arguments);
+
+    cordova.exec(
+        successCallback,
+        errorCallback,
+        SELLIGENT_PLUGIN,
+        GET_DEVICE_ID
     );
 };
 

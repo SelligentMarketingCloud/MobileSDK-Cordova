@@ -116,6 +116,7 @@ For geolocation services, follow section 6.5 **Geolocation**, of the **IOS - Usi
 | clearCacheIntervalValue                     | enum [Selligent.ClearCacheIntervalValue](#selligentclearcacheintervalvalue)                   | No       | Both         |
 | configureLocationServices                   | boolean                                                                                       | No       | Both         |
 | inAppMessageRefreshType                     | enum [Selligent.InAppMessageRefreshType](#selligentinappmessagerefreshtype)                   | No       | Both         |
+| addInAppMessageFromPushToInAppMessageList   | boolean                                                                                       | No       | Both         |
 | appGroupId                                  | string                                                                                        | No       | iOS Only     |
 | shouldClearBadge                            | boolean                                                                                       | No       | iOS Only     |
 | shouldDisplayRemoteNotification             | boolean                                                                                       | No       | iOS Only     |
@@ -233,6 +234,8 @@ You can catch the deeplinks 2 ways:
     * [enableGeolocation example](#enablegeolocation-example)
   * [Selligent.isGeolocationEnabled(successCallback, errorCallback)](#selligentisgeolocationenabledsuccesscallback--errorcallback)
     * [isGeolocationEnabled example](#isgeolocationenabled-example)
+  * [Selligent.getDeviceId(successCallback)](#selligentgetdeviceidsuccesscallback)
+    * [getDeviceId example](#getdeviceid-example)
   * [Selligent.enableNotifications(successCallback, errorCallback, enabled)](#selligentenablenotificationssuccesscallback--errorcallback--enabled)
     * [enableNotifications example](#enablenotifications-example)
   * [Selligent.displayLastReceivedRemotePushNotification(successCallback, errorCallback)](#selligentdisplaylastreceivedremotepushnotificationsuccesscallback--errorcallback)
@@ -277,10 +280,6 @@ You can catch the deeplinks 2 ways:
 * [iOS Only/Specific Methods](#ios-only-specific-methods)
   * [Selligent.enableiOSLogging(successCallback, errorCallback, logLevels)](#selligentenableiosloggingsuccesscallback--errorcallback--loglevels)
     * [enableiOSLogging example](#enableioslogging-example)
-  * [Selligent.currentAuthorisationStatus(successCallback, errorCallback)](#selligentcurrentauthorisationstatussuccesscallback--errorcallback)
-    * [currentAuthorisationStatus Example](#currentauthorisationstatus-example)
-  * [Selligent.requestLocationAuthorisation(successCallback, errorCallback, iOSLocationAuthorisationType)](#selligentrequestlocationauthorisationsuccesscallback--errorcallback--ioslocationauthorisationtype)
-    * [requestLocationAuthorisation Example](#requestlocationauthorisation-example)
   * [Selligent.displayNotification(successCallback, errorCallback, notificationId)](#selligentdisplaynotificationsuccesscallback--errorcallback--notificationid)
     * [displayNotification Example](#displaynotification-example)
   * [Selligent.registerRemoteNotificationFetchCompletionHandler(successCallback, errorCallback)](#selligentregisterremotenotificationfetchcompletionhandlersuccesscallback--errorcallback)
@@ -290,6 +289,7 @@ You can catch the deeplinks 2 ways:
 
 * [Constants](#constants)
   * [Selligent.ClearCacheIntervalValue](#selligentclearcacheintervalvalue)
+  * [Selligent.InAppMessageType](#selligentinappmessagetype)
   * [Selligent.InAppMessageRefreshType](#selligentinappmessagerefreshtype)
   * [Selligent.AndroidRemoteMessagesDisplayType](#selligentandroidremotemessagesdisplaytype)
   * [Selligent.iOSLogLevel](#selligentiosloglevel)
@@ -429,6 +429,26 @@ window.Selligent.isGeolocationEnabled(
     <b><a href="#api-reference">back to API ToC</a></b>
 </div>
 
+#### Selligent.getDeviceId(successCallback)
+
+Returns the device id.
+
+The response of the success callback is a string containing the device id.
+
+##### getDeviceId example
+
+```javascript
+Selligent.getDeviceId(
+    function (deviceId) { // success callback
+        ...
+    }
+);
+```
+
+<div align="right">
+    <b><a href="#api-reference">back to API ToC</a></b>
+</div>
+
 #### Selligent.enableNotifications(successCallback, errorCallback, enabled)
 
 Enable or disable the usage of notifications.
@@ -551,16 +571,17 @@ The response of the success callback is an array of objects which contain the in
 
 **Detailed overview:**
 
-| Property           | Type                                                    | Description                                                       | Platform     |
-| ------------------ | ------------------------------------------------------- | ----------------------------------------------------------------- | ------------ |
-| id                 | string                                                  | Id of the in app message                                          | Both         |
-| title              | string                                                  | Title of the in app message                                       | Both         |
-| body               | string                                                  | Body of the in app message                                        | Both         |
-| creationDate       | number                                                  | Creation date of the in app message in unix time                  | Both         |
-| expirationDate     | number                                                  | Expiration date of the in app message in unix time                | Both         |
-| receptionDate      | number                                                  | Reception date of the in app message in unix time                 | Both         |
-| hasBeenSeen        | boolean                                                 | Indication if the in app message is seen                          | Both         | 
-| buttons            | array of objects                                        | Contains the buttons that are linked to the in app message        | Both         |
+| Property           | Type                                                          | Description                                                       | Platform     |
+| ------------------ | ------------------------------------------------------------- | ----------------------------------------------------------------- | ------------ |
+| id                 | string                                                        | Id of the in app message                                          | Both         |
+| title              | string                                                        | Title of the in app message                                       | Both         |
+| body               | string                                                        | Body of the in app message                                        | Both         |
+| type               | enum [Selligent.InAppMessageType](#selligentinappmessagetype) | Type of the in app message                                        | Both         |
+| creationDate       | number                                                        | Creation date of the in app message in unix time                  | Both         |
+| expirationDate     | number                                                        | Expiration date of the in app message in unix time                | Both         |
+| receptionDate      | number                                                        | Reception date of the in app message in unix time                 | Both         |
+| hasBeenSeen        | boolean                                                       | Indication if the in app message is seen                          | Both         | 
+| buttons            | array of objects                                              | Contains the buttons that are linked to the in app message        | Both         |
 
 <br />
 
@@ -756,6 +777,12 @@ And the detailed overview for items in the `messages` array is as such:
 | -------- | ------ | ------------------ |
 | id       | string | Id of a message    |
 | title    | string | Title of a message |
+
+In case of a broadcast event type _ReceivedDeviceId_ the detailed overview for the `data` is as such:
+
+| Property | Type   | Description   |
+| -------- | ------ | ------------- |
+| deviceId | string | The device id |
 
 In case of a broadcast event type _ReceivedGCMToken_ the detailed overview for the `data` is as such:
 
@@ -1071,54 +1098,6 @@ window.Selligent.enableiOSLogging(
     <b><a href="#api-reference">back to API ToC</a></b>
 </div>
 
-#### Selligent.currentAuthorisationStatus(successCallback, errorCallback)
-
-Get the current status of location authorisation.
-
-The response of the success callback is a number corresponding with a constant of the [Selligent.iOSLocationAuthorisationStatus](#selligentioslocationauthorisationstatus) enum.
-
-##### currentAuthorisationStatus Example
-
-```javascript
-window.Selligent.currentAuthorisationStatus(
-  function (response) { // success callback
-    ...
-  },
-  function (error) { // error callback
-    ...
-  }
-);
-```
-
-<div align="right">
-    <b><a href="#api-reference">back to API ToC</a></b>
-</div>
-
-#### Selligent.requestLocationAuthorisation(successCallback, errorCallback, iOSLocationAuthorisationType)
-
-Request an authorisation of using location on a device.
-
-The method accepts an iOSLocationAuthorisationType parameter to define the type of authorisation which should be requested as there are two possibilities: "in use" and "always".
-You can use constants of the [Selligent.iOSLocationAuthorisationType](#selligentioslocationauthorisationtype) enum to specify the authorisation request.
-
-##### requestLocationAuthorisation Example
-
-```javascript
-window.Selligent.requestLocationAuthorisation(
-  function (response) { // success callback
-    ...
-  },
-  function (error) { // error callback
-    ...
-  },
-  Selligent.iOSLocationAuthorisationType.IN_USE
-);
-```
-
-<div align="right">
-    <b><a href="#api-reference">back to API ToC</a></b>
-</div>
-
 #### Selligent.displayNotification(successCallback, errorCallback, notificationId)
 
 Display a notification based on its id, which is a string that needs to be parsed in the method with the `notificationId` parameter.
@@ -1202,6 +1181,25 @@ Defines the interval value to clear the cache.
 | QUARTER     | number | 6     | Clear cache quarterly                        |
 
 _Note: `ClearCacheIntervalValue.Android.DAY` is only used on Android and can not be used on iOS._
+
+<div align="right">
+    <b><a href="#api-reference">back to API ToC</a></b>
+</div>
+
+#### Selligent.InAppMessageType
+
+Defines the type of the in-app messages.
+
+| Name     | Type   | Value | Description                    |
+| -------- | ------ | ----- | ------------------------------ |
+| UNKNOWN  | number | -2    | In App message of unknown type |
+| HIDDEN   | number | -1    | In App message of hidden type  |
+| ALERT    | number | 0     |In App message of alert type    |
+| HTML     | number | 1     |In App message of html type     |
+| URL      | number | 2     |In App message of url type      |
+| IMAGE    | number | 3     |In App message of image type    |
+| MAP      | number | 4     |In App message of map type      |
+| PASSBOOK | number | 5     |In App message of passbook type |
 
 <div align="right">
     <b><a href="#api-reference">back to API ToC</a></b>
@@ -1347,6 +1345,7 @@ Defines the type of a broadcast event.
 | RECEIVED_IN_APP_MESSAGE          | string | "ReceivedInAppMessage"       | An in-app message has been received                   |
 | WILL_DISPLAY_NOTIFICATION        | string | "WillDisplayNotification"    | A notification will be displayed                      |
 | WILL_DISMISS_NOTIFICATION        | string | "WillDismissNotification"    | A notification will be dismissed                      |
+| RECEIVED_DEVICE_ID               | string | "ReceivedDeviceId"           | A device id has been received                         |
 | Android.RECEIVED_GCM_TOKEN       | string | "ReceivedGCMToken"           | A GCM token has been received (only on Android)       |
 | iOS.RECEIVED_REMOTE_NOTIFICATION | string | "ReceivedRemoteNotification" | A remote notification has been received (only on iOS) |
 
