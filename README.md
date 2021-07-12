@@ -83,14 +83,14 @@ If for some reason you can't remove and rebuild the Android platform it's import
 
 ## iOS Specific installation
 
-For remote push notifications, follow section 4 **Configure the APNS (Apple Push Notification Service)**, of the **IOS - Using the SDK** pdf.
+For remote push notifications, follow section [**Create an APNS Key**](https://github.com/SelligentMarketingCloud/MobileSDK-iOS/tree/master/Documentation#apns_key), of the native documentation.
 
 If you want rich push notifications, follow section 6.9 **Notification Extensions** as well.  
 Make sure you add your `appGroupId` to the `selligent.json`.
 
 > **IMPORTANT!** make sure your `appGroupId` has the following structure or it will not work: `group.{MAIN_APP_BUNDLE_ID}`
 
-For geolocation services, follow section 6.5 **Geolocation**, of the **IOS - Using the SDK** pdf. You also need to configure several permissions described in 5.3.3 **Permission for geo location**.
+For geolocation services, follow section [**Geolocation**](https://github.com/SelligentMarketingCloud/MobileSDK-iOS/tree/master/Documentation#geolocation), of the native documentation. You also need to configure several permissions described [**here**](https://github.com/SelligentMarketingCloud/MobileSDK-iOS/tree/master/Documentation#permission-for-geolocation).
 
 ## Using the API
 
