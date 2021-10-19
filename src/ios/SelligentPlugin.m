@@ -217,6 +217,13 @@ static NSString * const BROADCAST_RECEIVEDREMOTENOTIFICATION = @"ReceivedRemoteN
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
+
+- (void)registerForProvisionalRemoteNotification:(CDVInvokedUrlCommand *)command {
+    if (@available(iOS 12.0, *)) {
+        [[SMManager sharedInstance] registerForProvisionalRemoteNotification];
+    }
+}
+
 - (void)displayLastReceivedRemotePushNotification:(CDVInvokedUrlCommand *)command {
     [[SMManager sharedInstance] displayLastReceivedRemotePushNotification];
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];

@@ -11,6 +11,7 @@ var ENABLE_IN_APP_MESSAGES = "enableInAppMessages";
 var SEND_EVENT = "sendEvent";
 var SUBSCRIBE_TO_EVENTS = "subscribeToEvents";
 var DISPLAY_NOTIFICATION = "displayNotification";
+var REGISTER_FOR_PROVISIONAL_REMOTE_NOTIFICATION = "registerForProvisionalRemoteNotification";
 var REGISTER_REMOTE_NOTIFICATION_FETCH_COMPLETION_HANDLER = "registerRemoteNotificationFetchCompletionHandler";
 var FORCE_REMOTE_NOTIFICATION_BACKGROUND_FETCH_RESULT = "forceRemoteNotificationBackgroundFetchResult";
 
@@ -174,6 +175,20 @@ Selligent.displayNotification = function (successCallback, errorCallback, notifi
         SELLIGENT_PLUGIN,
         DISPLAY_NOTIFICATION,
         [notificationId]
+    );
+};
+
+/**
+ * register for Provisional Remote Notifications.
+ *  
+ * @param {function} successCallback Callback function on success.
+ */
+Selligent.registerForProvisionalRemoteNotification = function (successCallback, errorCallback) {
+    cordova.exec(
+        successCallback,
+        errorCallback,
+        SELLIGENT_PLUGIN,
+        REGISTER_FOR_PROVISIONAL_REMOTE_NOTIFICATION
     );
 };
 

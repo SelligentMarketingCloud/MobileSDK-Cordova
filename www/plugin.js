@@ -85,6 +85,10 @@ Selligent.reloadSettings = function (successCallback, errorCallback, settings) {
         errorCallback(SelligentHelpers.createTypeErrorMessage("inAppMessageRefreshType", settings.inAppMessageRefreshType, "number"));
         return;
     }
+    if (!SelligentHelpers.hasOptionalParameterAndMatchesType(settings, "remoteMessageDisplayType", "number", Selligent.RemoteMessagesDisplayType)) {
+        errorCallback(SelligentHelpers.createTypeErrorMessage("remoteMessageDisplayType", settings.remoteMessageDisplayType, "number"));
+        return;
+    }
     // iOS only
     if (!SelligentHelpers.hasOptionalParameterAndMatchesType(settings, "shouldClearBadge", "boolean")) {
         errorCallback(SelligentHelpers.createTypeErrorMessage("shouldClearBadge", settings.shouldClearBadge, "boolean"));
@@ -102,10 +106,6 @@ Selligent.reloadSettings = function (successCallback, errorCallback, settings) {
     // Android only 
     if (!SelligentHelpers.hasRequiredParameterAndMatchesType(settings, "fullyQualifiedNotificationActivityClassName", "string")) {
         errorCallback(SelligentHelpers.WRONG_ARGUMENTS + " " + "Expected an object with key \"fullyQualifiedNotificationActivityClassName\" of the type \"string\"." + " " + SelligentHelpers.MORE_INFORMATION);
-        return;
-    }
-    if (!SelligentHelpers.hasOptionalParameterAndMatchesType(settings, "remoteMessageDisplayType", "number", Selligent.AndroidRemoteMessagesDisplayType)) {
-        errorCallback(SelligentHelpers.createTypeErrorMessage("remoteMessageDisplayType", settings.remoteMessageDisplayType, "number"));
         return;
     }
 
@@ -178,12 +178,12 @@ Selligent.loadSettings = function (successCallback, errorCallback) {
  * @param {function} errorCallback Callback function on error.
  */
 Selligent.getInAppMessages = function (successCallback, errorCallback) {
-	cordova.exec(
-		successCallback,
-		errorCallback,
-		SELLIGENT_PLUGIN,
+    cordova.exec(
+        successCallback,
+        errorCallback,
+        SELLIGENT_PLUGIN,
         GET_IN_APP_MESSAGES
-	)
+    )
 }
 
 /**
@@ -236,7 +236,7 @@ Selligent.isGeolocationEnabled = function (successCallback, errorCallback) {
  * @param {function} errorCallback Callback function on error.
  * @returns {string} Returns the version of the underlying Selligent SDK.
  */
- Selligent.getDeviceId = function (successCallback, errorCallback) {
+Selligent.getDeviceId = function (successCallback, errorCallback) {
     // check that callbacks are functions
     // for more information see https://github.com/apache/cordova-js/blob/master/src/common/argscheck.js
     argscheck.checkArgs('FF', 'Selligent.getDeviceId', arguments);

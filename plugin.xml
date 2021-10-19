@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin
-        xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="2.3.0">
+        xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="2.4.0">
     <name>Selligent Cordova</name>
     <description>Cordova bridge for the Selligent SDK</description>
     <license>MIT</license>
@@ -115,7 +115,7 @@
         <header-file src="src/ios/Event+SMEvent.h"/>
         <source-file src="src/ios/Event+SMEvent.m"/>
 
-        <source-file src="src/ios/frameworks/libSelligentMobile2.6.1.a" framework="true" />
+        <source-file src="src/ios/frameworks/libSelligentMobile2.7.a" framework="true" />
         <header-file src="src/ios/frameworks/include/SMBaseMessage.h" />
         <header-file src="src/ios/frameworks/include/SMBlock.h" />
         <header-file src="src/ios/frameworks/include/SMClearCache.h" />
@@ -151,17 +151,23 @@
         <header-file src="src/ios/frameworks/include/SMManager+RemoteNotification.h" />
         <header-file src="src/ios/frameworks/include/SMManager+SilentPush.h" />
         <header-file src="src/ios/frameworks/include/SMManager+SMEvent.h" />
+        <header-file src="src/ios/frameworks/include/SMManager+SMLink.h" />
         <header-file src="src/ios/frameworks/include/SMManager+StyleOptions.h" />
         <header-file src="src/ios/frameworks/include/SMManager+UserNotification.h" />
+        <header-file src="src/ios/frameworks/include/SMManager+ViewController.h" />
         <header-file src="src/ios/frameworks/include/SMManagerHelper.h" />
         <header-file src="src/ios/frameworks/include/SMManagerInAppMessageDelegate.h" />
+        <header-file src="src/ios/frameworks/include/SMManagerSetting+Location.h" />
         <header-file src="src/ios/frameworks/include/SMManagerSetting.h" />
         <header-file src="src/ios/frameworks/include/SMManagerSettingIAC.h" />
         <header-file src="src/ios/frameworks/include/SMManagerSettingIAM.h" />
+        <header-file src="src/ios/frameworks/include/SMManagerUniversalLinksDelegate.h" />
         <header-file src="src/ios/frameworks/include/SMMessage.h" />
         <header-file src="src/ios/frameworks/include/SMNotificationAnnotationData.h" />
         <header-file src="src/ios/frameworks/include/SMNotificationButtonData.h" />
         <header-file src="src/ios/frameworks/include/SMNotificationButtonType.h" />
+        <header-file src="src/ios/frameworks/include/SMNotificationMessage.h" />
+        <header-file src="src/ios/frameworks/include/SMRemoteMessageDisplayType.h" />
         <header-file src="src/ios/frameworks/include/SMNSNotification.h" />
         <header-file src="src/ios/frameworks/include/SMSuccess.h" />
 

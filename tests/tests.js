@@ -51,11 +51,11 @@ exports.defineAutoTests = function () {
             expect(window.Selligent.InAppMessageRefreshType.DAY).toBe(13);
         });
 
-        it('should contain "AndroidRemoteMessagesDisplayType" constants that are defined', function () {
-            expect(window.Selligent.AndroidRemoteMessagesDisplayType).toBeDefined();
-            expect(window.Selligent.AndroidRemoteMessagesDisplayType.AUTOMATIC).toBe(20);
-            expect(window.Selligent.AndroidRemoteMessagesDisplayType.NONE).toBe(21);
-            expect(window.Selligent.AndroidRemoteMessagesDisplayType.NOTIFICATION).toBe(22);
+        it('should contain "RemoteMessagesDisplayType" constants that are defined', function () {
+            expect(window.Selligent.RemoteMessagesDisplayType).toBeDefined();
+            expect(window.Selligent.RemoteMessagesDisplayType.AUTOMATIC).toBe(20);
+            expect(window.Selligent.RemoteMessagesDisplayType.NONE).toBe(21);
+            expect(window.Selligent.RemoteMessagesDisplayType.NOTIFICATION).toBe(22);
         });
 
         it('should contain "iOSLogLevel" constants that are defined', function () {
@@ -182,7 +182,7 @@ exports.defineAutoTests = function () {
                 shouldDisplayRemoteNotification: true,
                 shouldPerformBackgroundFetch: true,
                 fullyQualifiedNotificationActivityClassName: "com.myCompany.myApplication",
-                remoteMessageDisplayType: window.Selligent.AndroidRemoteMessagesDisplayType.AUTOMATIC
+                remoteMessageDisplayType: window.Selligent.RemoteMessagesDisplayType.AUTOMATIC
             };
             Selligent.reloadSettings(
                 success,

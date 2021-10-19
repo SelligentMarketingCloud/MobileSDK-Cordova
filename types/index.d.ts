@@ -38,6 +38,10 @@ export function enableNotifications(
   errorCallback: Function,
   enabled: boolean
 ): void;
+export function registerForProvisionalRemoteNotification(
+  successCallback: Function,
+  errorCallback: Function
+): void;
 export function displayLastReceivedRemotePushNotification(
   successCallback: Function,
   errorCallback: Function

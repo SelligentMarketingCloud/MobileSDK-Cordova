@@ -17,6 +17,7 @@
 - (void)forceRemoteNotificationBackgroundFetchResult:(CDVInvokedUrlCommand *)command;
 - (void)getDeviceId:(CDVInvokedUrlCommand*)command;
 - (void)enableNotifications:(CDVInvokedUrlCommand *)command;
+- (void)registerForProvisionalRemoteNotification:(CDVInvokedUrlCommand *)command;
 - (void)displayLastReceivedRemotePushNotification:(CDVInvokedUrlCommand *)command;
 - (void)getLastRemotePushNotification:(CDVInvokedUrlCommand *)command;
 - (void)displayNotification:(CDVInvokedUrlCommand *)command;

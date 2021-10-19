@@ -86,7 +86,7 @@
     [[SMManager sharedInstance] willPresentNotification:notification withCompletionHandler:completionHandler];
 }
 
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)(void))completionHandler {
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)(UNNotificationContentExtensionResponseOption options))completionHandler {
     [[SMManager sharedInstance] didReceiveNotificationResponse:response withCompletionHandler:completionHandler];
 }
 #endif

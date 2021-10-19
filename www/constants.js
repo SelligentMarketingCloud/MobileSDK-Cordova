@@ -29,15 +29,15 @@ module.exports = {
      * @description
      * Defines the in-app message type.
      */
-     InAppMessageType: {
-        UNKNOWN = -2,
-        HIDDEN = -1,
-        ALERT = 0,
-        HTML = 1,
-        URL = 2,
-        IMAGE = 3,
-        MAP = 4,
-        PASSBOOK = 5,
+    InAppMessageType: {
+        UNKNOWN: -2,
+        HIDDEN: -1,
+        ALERT: 0,
+        HTML: 1,
+        URL: 2,
+        IMAGE: 3,
+        MAP: 4,
+        PASSBOOK: 5,
     },
     /**
      * @description
@@ -52,6 +52,18 @@ module.exports = {
         HOUR: 12,
         /** Refresh in-app messages daily */
         DAY: 13,
+    },
+    /**
+   * @description
+   * Defines if and how remote messages can be displayed.
+   */
+    RemoteMessagesDisplayType: {
+        /** Display remote messages automatically */
+        AUTOMATIC: 20,
+        /** Don't display remote messages */
+        NONE: 21,
+        /** Display remote messages as notification */
+        NOTIFICATION: 22
     },
     /**
      * @description
