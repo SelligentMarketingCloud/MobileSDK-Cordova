@@ -7,6 +7,13 @@ This plugin defines a global `window.Selligent` object, which provides an API fo
 - Android
 - iOS
 
+This module uses the native Selligent SDKs:
+
+| SDK                                                                     | Version |
+| ----------------------------------------------------------------------- | ------- |
+| [Android](https://github.com/SelligentMarketingCloud/MobileSDK-Android) | 3.8.0   |
+| [iOS](https://github.com/SelligentMarketingCloud/MobileSDK-iOS)         | 2.7.1   |
+
 ## Installation
 
 ### Cordova
@@ -18,6 +25,45 @@ Execute the following command: `cordova plugin add @selligent-marketing-cloud/se
 Execute the following command: `ionic cordova plugin add @selligent-marketing-cloud/selligent-cordova`
 
 ## Android Specific installation
+
+> ### **Atention for Huawei developers!**
+>
+> In order to use this plugin on Huawei devices (without Goggle Play services), you should add the following dependencies in the `build.gradle` files of the Android project in your Cordova project:
+>
+> In your Android project's root `build.gradle` file:
+>
+> ```gradle
+>
+> buildscript {
+>  repositories {
+>   maven { url 'https://developer.huawei.com/repo/' }
+>  }
+>  dependencies {
+>   classpath: 'com.huawei.agconnect.agcp:1.6.0.300'
+>  }
+> }
+>
+> allProjects: {
+>   repositories: {
+>     maven: { url 'https://developer.huawei.com/repo/' }
+>   }
+> }
+>
+> ```
+>
+> In your app module's `build.gradle` file:
+>
+> ```gradle
+>
+> apply plugin 'com.huawei.agconnect'
+>
+> dependencies {
+>   api 'com.huawei.hms:base:6.2.0.300'
+>   api 'com.huawei.hms:push:6.1.0.300'
+>   api 'com.huawei.hms:maps:6.2.0.301'
+> }
+>
+> ```
 
 > ### **Attention!**
 >
@@ -68,7 +114,7 @@ Add the following properties to the `selligent.json` file:
 
 The plugin has a cordova build hook for Android. The hook will rebuild the `ext.postBuildExtras` section of the `build-extras.gradle` file. It will add various repositories and settings needed to build the plugin. You can customize this file yourself, but it's important to keep the `ext.postBuildExtras` section last.
 
-All dependency verions of this plugin are preferences that can be customized. The preferences are the following: `MULTIDEX_VERSION, APP_COMPAT_VERSION, FIREBASE_VERSION, FIREBASE_JOB_DISPATCHER_VERSION, PLAY_SERVICES_VERSION, PLOT_PROJECTS_VERSION, GSON_VERSION, METADATA_EXTRACTOR_VERSION`
+All dependency verions of this plugin are preferences that can be customized. The preferences are the following: `MULTIDEX_VERSION, APP_COMPAT_VERSION, FIREBASE_VERSION, FIREBASE_JOB_DISPATCHER_VERSION, PLAY_SERVICES_VERSION, GSON_VERSION, METADATA_EXTRACTOR_VERSION`
 
 #### Upgrading the plugin to a new version
 
@@ -91,8 +137,6 @@ Make sure you add your `appGroupId` to the `selligent.json`.
 
 > **IMPORTANT!** make sure your `appGroupId` has the following structure or it will not work: `group.{MAIN_APP_BUNDLE_ID}`
 
-For geolocation services, follow section [**Geolocation**](https://github.com/SelligentMarketingCloud/MobileSDK-iOS/tree/master/Documentation#geolocation), of the native documentation. You also need to configure several permissions described [**here**](https://github.com/SelligentMarketingCloud/MobileSDK-iOS/tree/master/Documentation#permission-for-geolocation).
-
 ## Using the API
 
 1. First, bootstrap the plugin
@@ -109,25 +153,24 @@ For geolocation services, follow section [**Geolocation**](https://github.com/Se
 
 **Detailed overview:**
 
-| Property                                    | Type                                                                                          | Required | Platform     |
-| ------------------------------------------- | --------------------------------------------------------------------------------------------- | -------- | ------------ |
-| url                                         | string                                                                                        | Yes      | Both         |
-| clientId                                    | string                                                                                        | Yes      | Both         |
-| privateKey                                  | string                                                                                        | Yes      | Both         |
-| googleApplicationId                         | string                                                                                        | No       | Both         |
-| clearCacheIntervalValue                     | enum [Selligent.ClearCacheIntervalValue](#selligentclearcacheintervalvalue)                   | No       | Both         |
-| configureLocationServices                   | boolean                                                                                       | No       | Both         |
-| inAppMessageRefreshType                     | enum [Selligent.InAppMessageRefreshType](#selligentinappmessagerefreshtype)                   | No       | Both         |
-| addInAppMessageFromPushToInAppMessageList   | boolean                                                                                       | No       | Both         |
-| appGroupId                                  | string                                                                                        | No       | iOS Only     |
-| shouldClearBadge                            | boolean                                                                                       | No       | iOS Only     |
-| shouldDisplayRemoteNotification             | boolean                                                                                       | No       | iOS Only     |
-| shouldPerformBackgroundFetch                | boolean                                                                                       | No       | iOS Only     |
-| doNotListenToThePush                        | boolean                                                                                       | No       | Android Only |
-| doNotFetchTheToken                          | boolean                                                                                       | No       | Android Only |
-| loadCacheAsynchronously                     | boolean                                                                                       | No       | Android Only |
-| fullyQualifiedNotificationActivityClassName | string                                                                                        | No       | Android Only |
-| remoteMessageDisplayType                    | enum [Selligent.AndroidRemoteMessagesDisplayType](#selligentAndroidRemoteMessagesDisplayType) | No       | Android Only |
+| Property                                    | Type                                                                            | Required | Platform     |
+| ------------------------------------------- | ------------------------------------------------------------------------------- | -------- | ------------ |
+| url                                         | string                                                                          | Yes      | Both         |
+| clientId                                    | string                                                                          | Yes      | Both         |
+| privateKey                                  | string                                                                          | Yes      | Both         |
+| googleApplicationId                         | string                                                                          | No       | Both         |
+| clearCacheIntervalValue                     | enum [Selligent.ClearCacheIntervalValue](#selligentclearcacheintervalvalue)     | No       | Both         |
+| inAppMessageRefreshType                     | enum [Selligent.InAppMessageRefreshType](#selligentinappmessagerefreshtype)     | No       | Both         |
+| addInAppMessageFromPushToInAppMessageList   | boolean                                                                         | No       | Both         |
+| remoteMessageDisplayType                    | enum [Selligent.RemoteMessagesDisplayType](#selligentremotemessagesdisplaytype) | No       | Both         |
+| appGroupId                                  | string                                                                          | No       | iOS Only     |
+| shouldClearBadge                            | boolean                                                                         | No       | iOS Only     |
+| shouldDisplayRemoteNotification             | boolean                                                                         | No       | iOS Only     |
+| shouldPerformBackgroundFetch                | boolean                                                                         | No       | iOS Only     |
+| doNotListenToThePush                        | boolean                                                                         | No       | Android Only |
+| doNotFetchTheToken                          | boolean                                                                         | No       | Android Only |
+| loadCacheAsynchronously                     | boolean                                                                         | No       | Android Only |
+| fullyQualifiedNotificationActivityClassName | string                                                                          | No       | Android Only |
 
 3. Add a button for testing purposes
 
@@ -233,10 +276,6 @@ You can catch the deeplinks 2 ways:
     - [loadSettings example](#loadsettings-example)
   - [Selligent.sendDeviceInfo(successCallback, errorCallback, options)](#selligentsenddeviceinfosuccesscallback--errorcallback--options)
     - [sendDeviceInfo example](#senddeviceinfo-example)
-  - [Selligent.enableGeolocation(successCallback, errorCallback, enabled)](#selligentenablegeolocationsuccesscallback--errorcallback--enabled)
-    - [enableGeolocation example](#enablegeolocation-example)
-  - [Selligent.isGeolocationEnabled(successCallback, errorCallback)](#selligentisgeolocationenabledsuccesscallback--errorcallback)
-    - [isGeolocationEnabled example](#isgeolocationenabled-example)
   - [Selligent.getDeviceId(successCallback)](#selligentgetdeviceidsuccesscallback)
     - [getDeviceId example](#getdeviceid-example)
   - [Selligent.enableNotifications(successCallback, errorCallback, enabled)](#selligentenablenotificationssuccesscallback--errorcallback--enabled)
@@ -287,7 +326,9 @@ You can catch the deeplinks 2 ways:
     - [enableiOSLogging example](#enableioslogging-example)
   - [Selligent.displayNotification(successCallback, errorCallback, notificationId)](#selligentdisplaynotificationsuccesscallback--errorcallback--notificationid)
     - [displayNotification Example](#displaynotification-example)
-  - [Selligent.registerRemoteNotificationFetchCompletionHandler(successCallback, errorCallback)](#selligentregisterremotenotificationfetchcompletionhandlersuccesscallback--errorcallback)
+  - [Selligent.registerForProvisionalRemoteNotification(successCallback, errorCallback)](#selligentregisterforprovisionalremotenotificationsuccesscallback--errorCallback)
+    - [registerForProvisionalRemoteNotification example](#registerForProvisionalRemoteNotification-example)
+    - [Selligent.registerRemoteNotificationFetchCompletionHandler(successCallback, errorCallback)](#selligentregisterremotenotificationfetchcompletionhandlersuccesscallback--errorcallback)
     - [registerRemoteNotificationFetchCompletionHandler example](#registerremotenotificationfetchcompletionhandler-example)
   - [Selligent.forceRemoteNotificationBackgroundFetchResult(successCallback, errorCallback, iOSBackgroundFetchResult)](#selligentforceremotenotificationbackgroundfetchresultsuccesscallback--errorcallback--iosbackgroundfetchresult)
     - [forceRemoteNotificationBackgroundFetchResult example](#forceremotenotificationbackgroundfetchresult-example)
@@ -296,11 +337,9 @@ You can catch the deeplinks 2 ways:
   - [Selligent.ClearCacheIntervalValue](#selligentclearcacheintervalvalue)
   - [Selligent.InAppMessageType](#selligentinappmessagetype)
   - [Selligent.InAppMessageRefreshType](#selligentinappmessagerefreshtype)
-  - [Selligent.AndroidRemoteMessagesDisplayType](#selligentandroidremotemessagesdisplaytype)
+  - [Selligent.RemoteMessagesDisplayType](#selligentremotemessagesdisplaytype)
   - [Selligent.iOSLogLevel](#selligentiosloglevel)
   - [Selligent.iOSBackgroundFetchResult](#selligentiosbackgroundfetchresult)
-  - [Selligent.iOSLocationAuthorisationStatus](#selligentioslocationauthorisationstatus)
-  - [Selligent.iOSLocationAuthorisationType](#selligentioslocationauthorisationtype)
   - [Selligent.EventType](#selligenteventtype)
   - [Selligent.iOSNotificationButtonType](#selligentiosnotificationbuttontype)
   - [Selligent.BroadcastEventType](#selligentbroadcasteventtype)
@@ -378,53 +417,6 @@ window.Selligent.sendDeviceInfo(
   },
   {
     externalId: "an external id here"
-  }
-);
-```
-
-<div align="right">
-    <b><a href="#api-reference">back to API ToC</a></b>
-</div>
-
-#### Selligent.enableGeolocation(successCallback, errorCallback, enabled)
-
-Enable or disable geolocation services.
-
-The `enabled` parameter is a required boolean to enable or disable geolocation services.
-
-##### enableGeolocation example
-
-```javascript
-window.Selligent.enableGeolocation(
-  function (response) { // success callback
-    ...
-  },
-  function (error) { // error callback
-    ...
-  },
-  true
-);
-```
-
-<div align="right">
-    <b><a href="#api-reference">back to API ToC</a></b>
-</div>
-
-#### Selligent.isGeolocationEnabled(successCallback, errorCallback)
-
-Check if geolocation services are enabled or disabled.
-
-The response of the success callback is a boolean stating geolocation services are enabled or disabled.
-
-##### isGeolocationEnabled example
-
-```javascript
-window.Selligent.isGeolocationEnabled(
-  function (response) { // success callback
-    ...
-  },
-  function (error) { // error callback
-    ...
   }
 );
 ```
@@ -1025,7 +1017,7 @@ window.Selligent.getGCMToken(
 
 Get the type of the remote messages that are being displayed.
 
-The response of the success callback is a number corresponding with a constant of the [AndroidRemoteMessagesDisplayType](#selligentinappmessagerefreshtype) enum.
+The response of the success callback is a number corresponding with a constant of the [RemoteMessagesDisplayType](#selligentremotemessagesdisplaytype) enum.
 
 ##### getRemoteMessagesDisplayType Example
 
@@ -1118,6 +1110,24 @@ window.Selligent.displayNotification(
     ...
   },
   "some notification id"
+);
+```
+
+<div align="right">
+    <b><a href="#api-reference">back to API ToC</a></b>
+</div>
+
+#### Selligent.registerForProvisionalRemoteNotification(successCallback)
+
+You can decide to first ask for the Provisional push authorization (which will provide a valid push token but will not show any prompt to the user) if you want to contact users that did not decide about the Push permission yet (you can call `enableNotifications` later and it will still display the push permission prompt to the user).
+
+##### registerForProvisionalRemoteNotification example
+
+```javascript
+window.Selligent.registerForProvisionalRemoteNotification(
+    function () { // success callback
+        ...
+    }
 );
 ```
 
@@ -1227,7 +1237,7 @@ _Note: `InAppMessageRefreshType.Android.MINUTE` is only used on Android and can 
     <b><a href="#api-reference">back to API ToC</a></b>
 </div>
 
-#### Selligent.AndroidRemoteMessagesDisplayType
+#### Selligent.RemoteMessagesDisplayType
 
 Defines if and how remote messages can be displayed on Android.
 
@@ -1268,34 +1278,6 @@ Description of the possible results of a background fetch on iOS.
 | NEW_DATA | number | 60    | Background fetch resulted in new data    |
 | NO_DATA  | number | 61    | Background fetch resulted in no new data |
 | FAILED   | number | 62    | Background fetch failed                  |
-
-<div align="right">
-    <b><a href="#api-reference">back to API ToC</a></b>
-</div>
-
-#### Selligent.iOSLocationAuthorisationStatus
-
-Description of the possible status of use of location services on a device.
-
-| Name           | Type   | Value | Description                                     |
-| -------------- | ------ | ----- | ----------------------------------------------- |
-| UNKNOWN        | number | 70    | Status of use of location services is unknown   |
-| REFUSED        | number | 71    | Use of location services is refused             |
-| GRANTED_IN_USE | number | 72    | Use of location services is granted when in use |
-| GRANTED_ALWAYS | number | 72    | Use of location services is always granted      |
-
-<div align="right">
-    <b><a href="#api-reference">back to API ToC</a></b>
-</div>
-
-#### Selligent.iOSLocationAuthorisationType
-
-Defines the level of request for the authorisation of usage of location services on a device.
-
-| Name   | Type   | Value | Description                                               |
-| ------ | ------ | ----- | --------------------------------------------------------- |
-| IN_USE | number | 80    | Request authorisation when location services are in use   |
-| ALWAYS | number | 81    | Always request the authorisation of the location services |
 
 <div align="right">
     <b><a href="#api-reference">back to API ToC</a></b>

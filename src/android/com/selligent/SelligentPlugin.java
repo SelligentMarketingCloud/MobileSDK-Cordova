@@ -48,8 +48,6 @@ public class SelligentPlugin extends CordovaPlugin {
     private static final String GET_IN_APP_MESSAGES = "getInAppMessages";
     private static final String SET_IN_APP_MESSAGE_AS_SEEN = "setInAppMessageAsSeen";
     private static final String EXECUTE_BUTTON_ACTION = "executeButtonAction";
-    private static final String ENABLE_GEOLOCATION = "enableGeolocation";
-    private static final String IS_GEOLOCATION_ENABLED = "isGeolocationEnabled";
     private static final String SEND_EVENT = "sendEvent";
     private static final String GET_DEVICE_ID = "getDeviceId";
     private static final String ENABLE_NOTIFICATIONS = "enableNotifications";
@@ -98,11 +96,7 @@ public class SelligentPlugin extends CordovaPlugin {
                 return setInAppMessageAsSeen(args, callbackContext);
             case EXECUTE_BUTTON_ACTION:
                 return executeButtonAction(args, callbackContext);
-            case ENABLE_GEOLOCATION:
-                return enableGeolocation(args, callbackContext);
-            case IS_GEOLOCATION_ENABLED:
-                return isGeolocationEnabled(callbackContext);
-            case SEND_EVENT:
+          case SEND_EVENT:
                 return sendEvent(args, callbackContext);
             case GET_DEVICE_ID:
                 return getDeviceId(callbackContext);
@@ -293,25 +287,6 @@ public class SelligentPlugin extends CordovaPlugin {
                 callbackContext.error(String.format("No message with id %s found", messageId));
             }
         });
-        return true;
-    }
-
-    private boolean enableGeolocation(JSONArray args, CallbackContext callbackContext) throws JSONException {
-        final Boolean enable = args.getBoolean(0);
-
-        if (enable) {
-            smManager.enableGeolocation();
-        } else {
-            smManager.disableGeolocation();
-        }
-        callbackContext.success();
-        return true;
-    }
-
-    private boolean isGeolocationEnabled(CallbackContext callbackContext) {
-        final Boolean isGeolocationEnabled = smManager.isGeolocationEnabled();
-
-        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, isGeolocationEnabled));
         return true;
     }
 

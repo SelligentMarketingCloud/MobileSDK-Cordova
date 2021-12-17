@@ -14,7 +14,6 @@ class Settings {
     private String notificationSmallIcon;
     private String notificationLargeIcon;
     private Boolean addInAppMessageFromPushToInAppMessageList;
-    private Boolean configureLocationServices;
     private Boolean doNotFetchTheToken;
     private Boolean doNotListenToThePush;
     private Boolean loadCacheAsynchronously;
@@ -58,10 +57,6 @@ class Settings {
         return addInAppMessageFromPushToInAppMessageList;
     }
 
-    public Boolean getConfigureLocationServices() {
-        return configureLocationServices;
-    }
-
     public ClearCacheIntervalValue getClearCacheIntervalValue() {
         return clearCacheIntervalValue;
     }
@@ -82,7 +77,6 @@ class Settings {
         settings.privateKey = settingsJSONObject.getString("privateKey");
         settings.googleApplicationId = settingsJSONObject.optString("googleApplicationId");
         settings.addInAppMessageFromPushToInAppMessageList = settingsJSONObject.optBoolean("addInAppMessageFromPushToInAppMessageList");
-        settings.configureLocationServices = settingsJSONObject.optBoolean("configureLocationServices");
         settings.activityName = settingsJSONObject.getString("fullyQualifiedNotificationActivityClassName");
         settings.notificationSmallIcon = settingsJSONObject.optString("notificationSmallIcon");
         settings.notificationLargeIcon = settingsJSONObject.optString("notificationLargeIcon");

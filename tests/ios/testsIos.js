@@ -35,11 +35,6 @@ exports.defineAutoTests = function () {
             expect(typeof window.Selligent.enableInAppMessages === 'function').toBe(true);
         });
 
-        it('should contain a "requestLocationAuthorisation" function', function () {
-            expect(typeof window.Selligent.requestLocationAuthorisation).toBeDefined();
-            expect(typeof window.Selligent.requestLocationAuthorisation === 'function').toBe(true);
-        });
-
         it('should contain a "sendEvent" function', function () {
             expect(typeof window.Selligent.sendEvent).toBeDefined();
             expect(typeof window.Selligent.sendEvent === 'function').toBe(true);

@@ -3,8 +3,7 @@ const fs = require('fs');
 const destinyGradleExtrasFile = 'platforms/android/app/build-extras.gradle'
 const repositories = [
   'jcenter()',
-  'maven { url "https://maven.google.com" }',
-  'maven { url "https://maven-repo.plotprojects.com" }'
+  'maven { url "https://maven.google.com" }'
 ]
 
 const dependencies = [];
