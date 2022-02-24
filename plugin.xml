@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin
-        xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="2.5.0">
+        xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="2.6.0">
     <name>Selligent Cordova</name>
     <description>Cordova bridge for the Selligent SDK</description>
     <license>MIT</license>
@@ -68,6 +68,9 @@
         <framework src="com.google.android.gms:play-services-maps:$PLAY_SERVICES_VERSION" />
         <framework src="com.google.android.gms:play-services-location:$PLAY_SERVICES_VERSION" />
 
+        <preference name="PLOT_PROJECTS_VERSION" default="3.12.1"/>
+        <framework src="com.plotprojects:plot-android:$PLOT_PROJECTS_VERSION" />
+
         <preference name="GSON_VERSION" default="2.8.2"/>
         <framework src="com.google.code.gson:gson:$GSON_VERSION" />
 
@@ -112,7 +115,7 @@
         <header-file src="src/ios/Event+SMEvent.h"/>
         <source-file src="src/ios/Event+SMEvent.m"/>
 
-        <source-file src="src/ios/frameworks/libSelligentMobile.a" framework="true" />
+        <source-file src="src/ios/frameworks/libSelligentMobile2.7.2.a" framework="true" />
         <header-file src="src/ios/frameworks/include/SMBaseMessage.h" />
         <header-file src="src/ios/frameworks/include/SMBlock.h" />
         <header-file src="src/ios/frameworks/include/SMClearCache.h" />
@@ -143,6 +146,7 @@
         <header-file src="src/ios/frameworks/include/SMManager+DataTransaction.h" />
         <header-file src="src/ios/frameworks/include/SMManager+InAppContent.h" />
         <header-file src="src/ios/frameworks/include/SMManager+InAppMessage.h" />
+        <header-file src="src/ios/frameworks/include/SMManager+Location.h" />
         <header-file src="src/ios/frameworks/include/SMManager+Log.h" />
         <header-file src="src/ios/frameworks/include/SMManager+RemoteNotification.h" />
         <header-file src="src/ios/frameworks/include/SMManager+SilentPush.h" />
@@ -153,6 +157,7 @@
         <header-file src="src/ios/frameworks/include/SMManager+ViewController.h" />
         <header-file src="src/ios/frameworks/include/SMManagerHelper.h" />
         <header-file src="src/ios/frameworks/include/SMManagerInAppMessageDelegate.h" />
+        <header-file src="src/ios/frameworks/include/SMManagerSetting+Location.h" />
         <header-file src="src/ios/frameworks/include/SMManagerSetting.h" />
         <header-file src="src/ios/frameworks/include/SMManagerSettingIAC.h" />
         <header-file src="src/ios/frameworks/include/SMManagerSettingIAM.h" />

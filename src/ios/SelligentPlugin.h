@@ -8,6 +8,9 @@
 - (void)versionLib:(CDVInvokedUrlCommand*)command;
 - (void)applyLogLevel:(CDVInvokedUrlCommand*)command;
 - (void)enableInAppMessages:(CDVInvokedUrlCommand*)command;
+- (void)requestLocationAuthorisation:(CDVInvokedUrlCommand*)command;
+- (void)isGeolocationEnabled:(CDVInvokedUrlCommand*)command;
+- (void)enableGeolocation:(CDVInvokedUrlCommand*)command;
 - (void)sendDeviceInfo:(CDVInvokedUrlCommand*)command;
 - (void)sendEvent:(CDVInvokedUrlCommand*)command;
 - (void)registerRemoteNotificationFetchCompletionHandler:(CDVInvokedUrlCommand *)command;

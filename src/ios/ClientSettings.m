@@ -11,6 +11,7 @@
 @property (nonatomic, strong) NSNumber *addInAppMessageFromPushToInAppMessageList;
 @property (nonatomic, strong) NSNumber *shouldClearBadge;
 @property (nonatomic, strong) NSNumber *shouldDisplayRemoteNotification;
+@property (nonatomic, strong) NSNumber *configureLocationServices;
 @property (nonatomic, strong) NSNumber *clearCacheIntervalValue;
 @property (nonatomic, strong) NSNumber *remoteMessageDisplayType;
 @property (nonatomic, strong) InAppMessageSettings *inAppMessageSettings;
@@ -28,6 +29,7 @@
     clientSettings.addInAppMessageFromPushToInAppMessageList = dictionary[@"addInAppMessageFromPushToInAppMessageList"];
     clientSettings.shouldClearBadge = dictionary[@"shouldClearBadge"];
     clientSettings.shouldDisplayRemoteNotification = dictionary[@"shouldDisplayRemoteNotification"];
+    clientSettings.configureLocationServices = dictionary[@"configureLocationServices"];
     clientSettings.clearCacheIntervalValue = dictionary[@"clearCacheIntervalValue"];
     clientSettings.remoteMessageDisplayType = dictionary[@"remoteMessageDisplayType"];
     clientSettings.inAppMessageSettings = [InAppMessageSettings fromDictionary:dictionary];

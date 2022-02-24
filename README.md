@@ -11,8 +11,8 @@ This module uses the native Selligent SDKs:
 
 | SDK                                                                     | Version |
 | ----------------------------------------------------------------------- | ------- |
-| [Android](https://github.com/SelligentMarketingCloud/MobileSDK-Android) | 3.8.0   |
-| [iOS](https://github.com/SelligentMarketingCloud/MobileSDK-iOS)         | 2.7.1   |
+| [Android](https://github.com/SelligentMarketingCloud/MobileSDK-Android) | 3.8.1   |
+| [iOS](https://github.com/SelligentMarketingCloud/MobileSDK-iOS)         | 2.7.2   |
 
 ## Installation
 
@@ -39,7 +39,7 @@ Execute the following command: `ionic cordova plugin add @selligent-marketing-cl
 >   maven { url 'https://developer.huawei.com/repo/' }
 >  }
 >  dependencies {
->   classpath: 'com.huawei.agconnect.agcp:1.6.0.300'
+>   classpath 'com.huawei.agconnect:agcp:1.6.0.300'
 >  }
 > }
 >
@@ -55,7 +55,7 @@ Execute the following command: `ionic cordova plugin add @selligent-marketing-cl
 >
 > ```gradle
 >
-> apply plugin 'com.huawei.agconnect'
+> apply plugin: 'com.huawei.agconnect'
 >
 > dependencies {
 >   api 'com.huawei.hms:base:6.2.0.300'
@@ -114,7 +114,7 @@ Add the following properties to the `selligent.json` file:
 
 The plugin has a cordova build hook for Android. The hook will rebuild the `ext.postBuildExtras` section of the `build-extras.gradle` file. It will add various repositories and settings needed to build the plugin. You can customize this file yourself, but it's important to keep the `ext.postBuildExtras` section last.
 
-All dependency verions of this plugin are preferences that can be customized. The preferences are the following: `MULTIDEX_VERSION, APP_COMPAT_VERSION, FIREBASE_VERSION, FIREBASE_JOB_DISPATCHER_VERSION, PLAY_SERVICES_VERSION, GSON_VERSION, METADATA_EXTRACTOR_VERSION`
+All dependency versions of this plugin are preferences that can be customized. The preferences are the following: `MULTIDEX_VERSION, APP_COMPAT_VERSION, FIREBASE_VERSION, FIREBASE_JOB_DISPATCHER_VERSION, PLAY_SERVICES_VERSION, PLOT_PROJECTS_VERSION, GSON_VERSION, METADATA_EXTRACTOR_VERSION`
 
 #### Upgrading the plugin to a new version
 
@@ -136,6 +136,8 @@ If you want rich push notifications, follow section 6.9 **Notification Extension
 Make sure you add your `appGroupId` to the `selligent.json`.
 
 > **IMPORTANT!** make sure your `appGroupId` has the following structure or it will not work: `group.{MAIN_APP_BUNDLE_ID}`
+
+For geolocation services, follow section [**Geolocation**](https://github.com/SelligentMarketingCloud/MobileSDK-iOS/tree/master/Documentation#geolocation), of the native documentation. You also need to configure several permissions described [**here**](https://github.com/SelligentMarketingCloud/MobileSDK-iOS/tree/master/Documentation#permission-for-geolocation).
 
 ## Using the API
 
@@ -160,6 +162,7 @@ Make sure you add your `appGroupId` to the `selligent.json`.
 | privateKey                                  | string                                                                          | Yes      | Both         |
 | googleApplicationId                         | string                                                                          | No       | Both         |
 | clearCacheIntervalValue                     | enum [Selligent.ClearCacheIntervalValue](#selligentclearcacheintervalvalue)     | No       | Both         |
+| configureLocationServices                   | boolean                                                                         | No       | Both         |
 | inAppMessageRefreshType                     | enum [Selligent.InAppMessageRefreshType](#selligentinappmessagerefreshtype)     | No       | Both         |
 | addInAppMessageFromPushToInAppMessageList   | boolean                                                                         | No       | Both         |
 | remoteMessageDisplayType                    | enum [Selligent.RemoteMessagesDisplayType](#selligentremotemessagesdisplaytype) | No       | Both         |
@@ -276,6 +279,10 @@ You can catch the deeplinks 2 ways:
     - [loadSettings example](#loadsettings-example)
   - [Selligent.sendDeviceInfo(successCallback, errorCallback, options)](#selligentsenddeviceinfosuccesscallback--errorcallback--options)
     - [sendDeviceInfo example](#senddeviceinfo-example)
+  - [Selligent.enableGeolocation(successCallback, errorCallback, enabled)](#selligentenablegeolocationsuccesscallback--errorcallback--enabled)
+    - [enableGeolocation example](#enablegeolocation-example)
+  - [Selligent.isGeolocationEnabled(successCallback, errorCallback)](#selligentisgeolocationenabledsuccesscallback--errorcallback)
+    - [isGeolocationEnabled example](#isgeolocationenabled-example)
   - [Selligent.getDeviceId(successCallback)](#selligentgetdeviceidsuccesscallback)
     - [getDeviceId example](#getdeviceid-example)
   - [Selligent.enableNotifications(successCallback, errorCallback, enabled)](#selligentenablenotificationssuccesscallback--errorcallback--enabled)
@@ -340,6 +347,8 @@ You can catch the deeplinks 2 ways:
   - [Selligent.RemoteMessagesDisplayType](#selligentremotemessagesdisplaytype)
   - [Selligent.iOSLogLevel](#selligentiosloglevel)
   - [Selligent.iOSBackgroundFetchResult](#selligentiosbackgroundfetchresult)
+  - [Selligent.iOSLocationAuthorisationStatus](#selligentioslocationauthorisationstatus)
+  - [Selligent.iOSLocationAuthorisationType](#selligentioslocationauthorisationtype)
   - [Selligent.EventType](#selligenteventtype)
   - [Selligent.iOSNotificationButtonType](#selligentiosnotificationbuttontype)
   - [Selligent.BroadcastEventType](#selligentbroadcasteventtype)
@@ -417,6 +426,53 @@ window.Selligent.sendDeviceInfo(
   },
   {
     externalId: "an external id here"
+  }
+);
+```
+
+<div align="right">
+    <b><a href="#api-reference">back to API ToC</a></b>
+</div>
+
+#### Selligent.enableGeolocation(successCallback, errorCallback, enabled)
+
+Enable or disable geolocation services.
+
+The `enabled` parameter is a required boolean to enable or disable geolocation services.
+
+##### enableGeolocation example
+
+```javascript
+window.Selligent.enableGeolocation(
+  function (response) { // success callback
+    ...
+  },
+  function (error) { // error callback
+    ...
+  },
+  true
+);
+```
+
+<div align="right">
+    <b><a href="#api-reference">back to API ToC</a></b>
+</div>
+
+#### Selligent.isGeolocationEnabled(successCallback, errorCallback)
+
+Check if geolocation services are enabled or disabled.
+
+The response of the success callback is a boolean stating geolocation services are enabled or disabled.
+
+##### isGeolocationEnabled example
+
+```javascript
+window.Selligent.isGeolocationEnabled(
+  function (response) { // success callback
+    ...
+  },
+  function (error) { // error callback
+    ...
   }
 );
 ```
@@ -1278,6 +1334,34 @@ Description of the possible results of a background fetch on iOS.
 | NEW_DATA | number | 60    | Background fetch resulted in new data    |
 | NO_DATA  | number | 61    | Background fetch resulted in no new data |
 | FAILED   | number | 62    | Background fetch failed                  |
+
+<div align="right">
+    <b><a href="#api-reference">back to API ToC</a></b>
+</div>
+
+#### Selligent.iOSLocationAuthorisationStatus
+
+Description of the possible status of use of location services on a device.
+
+| Name           | Type   | Value | Description                                     |
+| -------------- | ------ | ----- | ----------------------------------------------- |
+| UNKNOWN        | number | 70    | Status of use of location services is unknown   |
+| REFUSED        | number | 71    | Use of location services is refused             |
+| GRANTED_IN_USE | number | 72    | Use of location services is granted when in use |
+| GRANTED_ALWAYS | number | 72    | Use of location services is always granted      |
+
+<div align="right">
+    <b><a href="#api-reference">back to API ToC</a></b>
+</div>
+
+#### Selligent.iOSLocationAuthorisationType
+
+Defines the level of request for the authorisation of usage of location services on a device.
+
+| Name   | Type   | Value | Description                                               |
+| ------ | ------ | ----- | --------------------------------------------------------- |
+| IN_USE | number | 80    | Request authorisation when location services are in use   |
+| ALWAYS | number | 81    | Always request the authorisation of the location services |
 
 <div align="right">
     <b><a href="#api-reference">back to API ToC</a></b>

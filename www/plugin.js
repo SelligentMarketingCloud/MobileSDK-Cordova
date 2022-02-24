@@ -10,6 +10,8 @@ var VERSION_LIB = "versionLib";
 var RELOAD = "reload";
 var SEND_DEVICE_INFO = "sendDeviceInfo";
 var GET_IN_APP_MESSAGES = "getInAppMessages";
+var ENABLE_GEOLOCATION = "enableGeolocation";
+var IS_GEOLOCATION_ENABLED = "isGeolocationEnabled";
 var GET_DEVICE_ID = "getDeviceId";
 var ENABLE_NOTIFICATIONS = "enableNotifications";
 var DISPLAY_LAST_RECEIVED_REMOTE_PUSH_NOTIFICATION = "displayLastReceivedRemotePushNotification";
@@ -73,6 +75,10 @@ Selligent.reloadSettings = function (successCallback, errorCallback, settings) {
     }
     if (!SelligentHelpers.hasOptionalParameterAndMatchesType(settings, "clearCacheIntervalValue", "number", Selligent.ClearCacheIntervalValue)) {
         errorCallback(SelligentHelpers.createTypeErrorMessage("clearCacheIntervalValue", settings.clearCacheIntervalValue, "number"));
+        return;
+    }
+    if (!SelligentHelpers.hasOptionalParameterAndMatchesType(settings, "configureLocationServices", "boolean")) {
+        errorCallback(SelligentHelpers.createTypeErrorMessage("configureLocationServices", settings.configureLocationServices, "boolean"));
         return;
     }
     if (!SelligentHelpers.hasOptionalParameterAndMatchesType(settings, "inAppMessageRefreshType", "number", Selligent.InAppMessageRefreshType)) {
@@ -179,6 +185,49 @@ Selligent.getInAppMessages = function (successCallback, errorCallback) {
         GET_IN_APP_MESSAGES
     )
 }
+
+/**
+ * Enable/disable geolocation.
+ *  
+ * @param {function} successCallback Callback function on success.
+ * @param {function} errorCallback Callback function on error.
+ * @param {boolean} enabled Boolean to enable or disable geolocation.
+ */
+ Selligent.enableGeolocation = function (successCallback, errorCallback, enabled) {
+    // check that callbacks are functions (can't check args as a boolean)
+    argscheck.checkArgs('FF*', 'Selligent.enableGeolocation', arguments);
+
+    if (!SelligentHelpers.typeMatches(enabled, "boolean")) {
+        errorCallback(SelligentHelpers.WRONG_ARGUMENTS + " " + "Expected a boolean." + " " + SelligentHelpers.MORE_INFORMATION);
+        return;
+    }
+    cordova.exec(
+        successCallback,
+        errorCallback,
+        SELLIGENT_PLUGIN,
+        ENABLE_GEOLOCATION,
+        [enabled]
+    );
+};
+
+/**
+ * Check if geolocation is enabled or disabled.
+ *  
+ * @param {function} successCallback Callback function on success.
+ * @param {function} errorCallback Callback function on error.
+ * @returns {boolean} Returns a boolean stating geolocation is enabled or disabled.
+ */
+Selligent.isGeolocationEnabled = function (successCallback, errorCallback) {
+    // check that callbacks are functions
+    argscheck.checkArgs('FF', 'Selligent.isGeolocationEnabled', arguments);
+
+    cordova.exec(
+        successCallback,
+        errorCallback,
+        SELLIGENT_PLUGIN,
+        IS_GEOLOCATION_ENABLED
+    );
+};
 
 /**
  * Returns the device Id.

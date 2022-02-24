@@ -20,6 +20,15 @@ export function getInAppMessages(
   successCallback: Function,
   errorCallback: Function
 ): void;
+export function enableGeolocation(
+  successCallback: Function,
+  errorCallback: Function,
+  enabled: boolean
+): void;
+export function isGeolocationEnabled(
+  successCallback: Function,
+  errorCallback: Function
+): boolean;
 export function getDeviceId(
   successCallback: Function,
   errorCallback: Function

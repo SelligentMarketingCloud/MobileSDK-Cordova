@@ -5,6 +5,7 @@
 #import "SMManagerSettingIAM.h"
 #import "SMManager.h"
 #import "SMManager+Log.h"
+#import "SMManager+Location.h"
 #import "SMManager+InAppMessage.h"
 #import "SMManager+DataTransaction.h"
 #import "SMManager+RemoteNotification.h"
@@ -141,6 +142,23 @@ static NSString * const BROADCAST_RECEIVEDREMOTENOTIFICATION = @"ReceivedRemoteN
         }
     }
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: [NSString stringWithFormat:@"No message with id %@ found", messageId]] callbackId:command.callbackId];
+}
+
+- (void)isGeolocationEnabled:(CDVInvokedUrlCommand *)command {
+    BOOL enabled = [[SMManager sharedInstance] isGeoLocationEnabled];
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:enabled] callbackId:command.callbackId];
+}
+
+- (void)enableGeolocation:(CDVInvokedUrlCommand *)command {
+    NSNumber *arg = command.arguments[0];
+    BOOL enable = [arg boolValue];
+    if (enable) {
+        [[SMManager sharedInstance] enableGeoLocation];
+    } else {
+        [[SMManager sharedInstance] disableGeoLocation];
+    }
+    // execute isGeolocationEnabled routine to check and return current enabled status
+    [self isGeolocationEnabled:command];
 }
 
 - (void)sendDeviceInfo:(CDVInvokedUrlCommand *)command {

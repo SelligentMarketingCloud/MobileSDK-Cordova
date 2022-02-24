@@ -9,6 +9,7 @@ class SMSettingsFactory {
         smSettings.WebServiceUrl = settings.getUrl();
         smSettings.ClientId = settings.getClientId();
         smSettings.PrivateKey = settings.getPrivateKey();
+        smSettings.ConfigureGeolocation = settings.getConfigureLocationServices();
 
         final Boolean doNotFetchTheToken = settings.getDoNotFetchTheToken();
         if (doNotFetchTheToken != null) {

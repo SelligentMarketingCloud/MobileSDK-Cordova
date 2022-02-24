@@ -20,6 +20,8 @@ exports.defineAutoTests = function () {
     var VERSION_LIB = "versionLib";
     var RELOAD = "reload";
     var SEND_DEVICE_INFO = "sendDeviceInfo";
+    var ENABLE_GEOLOCATION = "enableGeolocation";
+    var IS_GEOLOCATION_ENABLED = "isGeolocationEnabled";
     var ENABLE_NOTIFICATIONS = "enableNotifications";
     var DISPLAY_LAST_RECEIVED_REMOTE_PUSH_NOTIFICATION = "displayLastReceivedRemotePushNotification";
     var GET_LAST_REMOTE_PUSH_NOTIFICATION = "getLastRemotePushNotification";
@@ -74,6 +76,13 @@ exports.defineAutoTests = function () {
             expect(window.Selligent.iOSBackgroundFetchResult.FAILED).toBe(62);
         });
 
+        it('should contain "iOSLocationAuthorisationStatus" constants that are defined', function () {
+            expect(window.Selligent.iOSLocationAuthorisationStatus).toBeDefined();
+            expect(window.Selligent.iOSLocationAuthorisationStatus.UNKNOWN).toBe(70);
+            expect(window.Selligent.iOSLocationAuthorisationStatus.REFUSED).toBe(71);
+            expect(window.Selligent.iOSLocationAuthorisationStatus.GRANTED_IN_USE).toBe(72);
+            expect(window.Selligent.iOSLocationAuthorisationStatus.GRANTED_ALWAYS).toBe(73);
+        });
 
         it('should contain "EventType" constants that are defined', function () {
             expect(window.Selligent.EventType).toBeDefined();
@@ -103,6 +112,16 @@ exports.defineAutoTests = function () {
         it('should contain a "loadSettings" function', function () {
             expect(typeof window.Selligent.loadSettings).toBeDefined();
             expect(typeof window.Selligent.loadSettings === 'function').toBeTruthy();
+        });
+
+        it('should contain a "enableGeolocation" function', function () {
+            expect(typeof window.Selligent.enableGeolocation).toBeDefined();
+            expect(typeof window.Selligent.enableGeolocation === 'function').toBeTruthy();
+        });
+
+        it('should contain a "isGeolocationEnabled" function', function () {
+            expect(typeof window.Selligent.isGeolocationEnabled).toBeDefined();
+            expect(typeof window.Selligent.isGeolocationEnabled === 'function').toBeTruthy();
         });
 
         it('should contain a "enableNotifications" function', function () {
@@ -157,6 +176,7 @@ exports.defineAutoTests = function () {
                 privateKey: "private key",
                 googleApplicationId: "google application id",
                 clearCacheIntervalValue: window.Selligent.ClearCacheIntervalValue.AUTO,
+                configureLocationServices: true,
                 inAppMessageRefreshType: window.Selligent.InAppMessageRefreshType.HOUR,
                 shouldClearBadge: true,
                 shouldDisplayRemoteNotification: true,
@@ -218,6 +238,23 @@ exports.defineAutoTests = function () {
                 privateKey: "privateKey",
                 clearCacheIntervalValue: "test" // expecting a number here
             };
+            Selligent.reloadSettings(
+                success,
+                error,
+                testSettings
+            );
+            expect(cordova.exec).not.toHaveBeenCalled();
+        });
+        it('should return an error on incorrect typeof "configureLocationServices"', function () {
+            var success = failTest;
+
+            var testSettings = {
+                url: "url",
+                clientId: "clientId",
+                privateKey: "privateKey",
+                configureLocationServices: "test" // expecting a boolean here
+            };
+
             Selligent.reloadSettings(
                 success,
                 error,
@@ -378,6 +415,66 @@ exports.defineAutoTests = function () {
             Selligent.loadSettings(success, failTest);
             expect(XMLHttpRequest.prototype.open).toHaveBeenCalled();
             expect(XMLHttpRequest.prototype.send).toHaveBeenCalled();
+        });
+    });
+
+    describe('enableGeolocation', function () {
+        beforeEach(function () {
+            spyOn(cordova, 'exec').and.callFake(function (successCallback, errorCallback, pluginName, methodName, args) {
+                successCallback("successful");
+            });
+        });
+        afterEach(function () {
+            cordova.exec.calls.reset();
+        });
+
+        it('should be successful with valid passed arguments', function () {
+            Selligent.enableGeolocation(
+                success,
+                error,
+                true
+            );
+            expect(cordova.exec).toHaveBeenCalledWith(success, error, SELLIGENT_PLUGIN, ENABLE_GEOLOCATION, [true]);
+        });
+        it('should return an error on insufficient arguments', function () {
+            var success = failTest;
+
+            Selligent.enableGeolocation(
+                success,
+                error
+            );
+
+            expect(cordova.exec).not.toHaveBeenCalled();
+        });
+        it('should return an error on incorrect typeof passed argument', function () {
+            var success = failTest;
+
+            Selligent.enableGeolocation(
+                success,
+                error,
+                "faulty string" // expecting a boolean here
+            );
+            expect(cordova.exec).not.toHaveBeenCalled();
+        });
+    });
+
+
+    describe('isGeolocationEnabled', function () {
+        beforeEach(function () {
+            spyOn(cordova, 'exec').and.callFake(function (successCallback, errorCallback, pluginName, methodName, args) {
+                successCallback("successful");
+            });
+        });
+        afterEach(function () {
+            cordova.exec.calls.reset();
+        });
+
+        it('should be successful with valid passed arguments', function () {
+            Selligent.isGeolocationEnabled(
+                success,
+                error
+            );
+            expect(cordova.exec).toHaveBeenCalledWith(success, error, SELLIGENT_PLUGIN, IS_GEOLOCATION_ENABLED);
         });
     });
 
