@@ -10,6 +10,9 @@ class SMSettingsFactory {
         smSettings.ClientId = settings.getClientId();
         smSettings.PrivateKey = settings.getPrivateKey();
         smSettings.ConfigureGeolocation = settings.getConfigureLocationServices();
+        smSettings.NotificationChannelId = settings.getNotificationChannelId();
+        smSettings.NotificationChannelName = settings.getNotificationChannelName();
+        smSettings.NotificationChannelDescription = settings.getNotificationChannelDescription();
 
         final Boolean doNotFetchTheToken = settings.getDoNotFetchTheToken();
         if (doNotFetchTheToken != null) {

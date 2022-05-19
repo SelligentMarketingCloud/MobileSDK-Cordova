@@ -11,8 +11,8 @@ This module uses the native Selligent SDKs:
 
 | SDK                                                                     | Version |
 | ----------------------------------------------------------------------- | ------- |
-| [Android](https://github.com/SelligentMarketingCloud/MobileSDK-Android) | 3.8.1   |
-| [iOS](https://github.com/SelligentMarketingCloud/MobileSDK-iOS)         | 2.7.2   |
+| [Android](https://github.com/SelligentMarketingCloud/MobileSDK-Android) | 3.9.0   |
+| [iOS](https://github.com/SelligentMarketingCloud/MobileSDK-iOS)         | 2.7.4   |
 
 ## Installation
 
@@ -174,6 +174,9 @@ For geolocation services, follow section [**Geolocation**](https://github.com/Se
 | doNotFetchTheToken                          | boolean                                                                         | No       | Android Only |
 | loadCacheAsynchronously                     | boolean                                                                         | No       | Android Only |
 | fullyQualifiedNotificationActivityClassName | string                                                                          | No       | Android Only |
+| notificationChannelId                       | string                                                                          | No       | Android Only |
+| notificationChannelName                     | string                                                                          | No       | Android Only |
+| notificationChannelDescription              | string                                                                          | No       | Android Only |
 
 3. Add a button for testing purposes
 

@@ -21,6 +21,9 @@ class Settings {
     private ClearCacheIntervalValue clearCacheIntervalValue;
     private InAppMessageRefreshType inAppMessageRefreshType;
     private RemoteMessageDisplayType remoteMessageDisplayType;
+    private String notificationChannelId = "SMChannel001";
+    private String notificationChannelName = "SMDefaultChannel";
+    private String notificationChannelDescription = "";
 
     private Settings() { }
 
@@ -74,6 +77,18 @@ class Settings {
         return remoteMessageDisplayType;
     }
 
+    public String getNotificationChannelId() {
+        return notificationChannelId;
+    }
+
+    public String getNotificationChannelName() {
+        return notificationChannelName;
+    }
+
+    public String getNotificationChannelDescription() {
+        return notificationChannelDescription;
+    }
+
     public static Settings fromJSONObject(JSONObject settingsJSONObject) throws JSONException {
         final Settings settings = new Settings();
 
@@ -89,6 +104,9 @@ class Settings {
         settings.doNotFetchTheToken = settingsJSONObject.optBoolean("doNotFetchTheToken");
         settings.doNotListenToThePush = settingsJSONObject.optBoolean("doNotListenToThePush");
         settings.loadCacheAsynchronously = settingsJSONObject.optBoolean("loadCacheAsynchronously");
+        settings.notificationChannelId = settingsJSONObject.optString("notificationChannelId");
+        settings.notificationChannelName = settingsJSONObject.optString("notificationChannelName");
+        settings.notificationChannelDescription = settingsJSONObject.optString("notificationChannelDescription");
         final Integer clearCacheIndex = settingsJSONObject.optInt("clearCacheIntervalValue");
         if (clearCacheIndex != 0) {
             settings.clearCacheIntervalValue = ClearCacheIntervalValue.valueOf(clearCacheIndex);
