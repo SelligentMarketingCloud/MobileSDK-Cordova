@@ -155,7 +155,19 @@ public class SelligentPlugin extends CordovaPlugin {
         final Settings settings = Settings.fromJSONObject(settingsJSONObject);
         final SMSettings smSettings = SMSettingsFactory.getSMSettings(settings);
 
-        smManager.reload(smSettings, cordova.getActivity());
+        SMCallback callback = new SMCallback() {
+            @Override
+            public void onSuccess(String s) {
+                callbackContext.success(s);
+            }
+
+            @Override
+            public void onError(int i, Exception e) {
+                callbackContext.error(i);
+            }
+        };
+
+        smManager.reload(smSettings, callback);
         callbackContext.success();
         return true;
     }
@@ -230,7 +242,7 @@ public class SelligentPlugin extends CordovaPlugin {
                                 buttonsJSONObject.put("id", button.id);
                                 buttonsJSONObject.put("value", button.value);
                                 buttonsJSONObject.put("label", button.label);
-                                buttonsJSONObject.put("action", button.action);
+                                buttonsJSONObject.put("action", button.action.getValue());
                                 buttonsJSONObject.put("type", button.type);
 
                                 buttonsJSONArray.put(buttonsJSONObject);
@@ -475,10 +487,8 @@ public class SelligentPlugin extends CordovaPlugin {
         {
             receiver = new SMForegroundGcmBroadcastReceiver(activity);
         }
+
         activity.registerReceiver(receiver, receiver.getIntentFilter());
-
-        smManager.registerDevice(activity);
-
         smManager.checkAndDisplayMessage(activity.getIntent(), activity);
     }
 

@@ -9,7 +9,6 @@ class Settings {
     private String url;
     private String clientId;
     private String privateKey;
-    private String googleApplicationId;
     private String activityName;
     private String notificationSmallIcon;
     private String notificationLargeIcon;
@@ -37,10 +36,6 @@ class Settings {
 
     public String getPrivateKey() {
         return privateKey;
-    }
-
-    public String getGoogleApplicationId() {
-        return googleApplicationId;
     }
 
     public String getActivityName() {
@@ -95,7 +90,6 @@ class Settings {
         settings.url = settingsJSONObject.getString("url");
         settings.clientId = settingsJSONObject.getString("clientId");
         settings.privateKey = settingsJSONObject.getString("privateKey");
-        settings.googleApplicationId = settingsJSONObject.optString("googleApplicationId");
         settings.addInAppMessageFromPushToInAppMessageList = settingsJSONObject.optBoolean("addInAppMessageFromPushToInAppMessageList");
         settings.configureLocationServices = settingsJSONObject.optBoolean("configureLocationServices");
         settings.activityName = settingsJSONObject.getString("fullyQualifiedNotificationActivityClassName");

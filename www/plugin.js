@@ -68,11 +68,6 @@ Selligent.reloadSettings = function (successCallback, errorCallback, settings) {
         errorCallback(SelligentHelpers.WRONG_ARGUMENTS + " " + "Expected an object with keys \"url\", \"clientId\" and \"privateKey\", and strings for values." + " " + SelligentHelpers.MORE_INFORMATION);
         return;
     }
-    // check if optional options are valid
-    if (!SelligentHelpers.hasOptionalParameterAndMatchesType(settings, "googleApplicationId", "string")) {
-        errorCallback(SelligentHelpers.createTypeErrorMessage("googleApplicationId", settings.googleApplicationId, "string"));
-        return;
-    }
     if (!SelligentHelpers.hasOptionalParameterAndMatchesType(settings, "clearCacheIntervalValue", "number", Selligent.ClearCacheIntervalValue)) {
         errorCallback(SelligentHelpers.createTypeErrorMessage("clearCacheIntervalValue", settings.clearCacheIntervalValue, "number"));
         return;

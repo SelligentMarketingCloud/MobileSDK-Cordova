@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin
-        xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="2.8.0">
+        xmlns="http://apache.org/cordova/ns/plugins/1.0" id="selligent-cordova" version="3.0.0">
     <name>Selligent Cordova</name>
     <description>Cordova bridge for the Selligent SDK</description>
     <license>MIT</license>
@@ -76,6 +76,9 @@
 
         <preference name="METADATA_EXTRACTOR_VERSION" default="2.9.1"/>
         <framework src="com.drewnoakes:metadata-extractor:$METADATA_EXTRACTOR_VERSION" />
+
+        <preference name="KOTLIN_COROUTINES_VERSION" default="1.6.2" />
+        <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-android:$KOTLIN_COROUTINES_VERSION" />
 
         <lib-file src="src/android/frameworks/selligent-sdk.aar" target="libs/selligent-sdk.aar" />
     </platform>

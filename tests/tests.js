@@ -174,7 +174,6 @@ exports.defineAutoTests = function () {
                 url: "url",
                 clientId: "client id",
                 privateKey: "private key",
-                googleApplicationId: "google application id",
                 clearCacheIntervalValue: window.Selligent.ClearCacheIntervalValue.AUTO,
                 configureLocationServices: true,
                 inAppMessageRefreshType: window.Selligent.InAppMessageRefreshType.HOUR,
@@ -210,23 +209,6 @@ exports.defineAutoTests = function () {
                     error
                 );
             }).toThrow();
-            expect(cordova.exec).not.toHaveBeenCalled();
-        });
-        it('should return an error on incorrect typeof "googleApplicationId"', function () {
-            var success = failTest;
-
-            var testSettings = {
-                url: "url",
-                clientId: "clientId",
-                privateKey: "privateKey",
-                googleApplicationId: true // expecting a string here, so this will trigger an error
-            };
-
-            Selligent.reloadSettings(
-                success,
-                error,
-                testSettings
-            );
             expect(cordova.exec).not.toHaveBeenCalled();
         });
         it('should return an error on incorrect typeof "clearCacheIntervalValue"', function () {

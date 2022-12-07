@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0] - 7 December 2022
+
+### Added
+- Add `org.jetbrains.kotlinx:kotlinx-coroutines-android` dependency to support Android SDK v4.0.1
+
+### Changed
+- Add version 4.0.1 of the Android SDK to `src/android/frameworks`
+- Change used native SDK version number to `4.0.1` for Android in README
+- Remove everything to do with `googleApplicationId` from Android, including tests, as this setting was completely removed from Selligent's SDK
+- On Android, use an SMNotificationButton's button action's `getValue()` method to get the action value, in accordance with Selligent's new API
+
 ## [2.8.0] - 12 September 2022
 
 ### Changed

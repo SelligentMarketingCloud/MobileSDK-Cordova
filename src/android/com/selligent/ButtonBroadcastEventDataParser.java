@@ -18,7 +18,7 @@ class ButtonBroadcastEventDataParser implements BroadcastEventDataParser {
         resultingJSONObject.put("type", button.type);
         resultingJSONObject.put("value", button.value);
         resultingJSONObject.put("label", button.label);
-        resultingJSONObject.put("action", button.action);
+        resultingJSONObject.put("action", button.action.getValue());
         if (button.data != null) {
             final JSONObject buttonData = new JSONObject();
             for(String dataKey : button.data.keySet()) {
