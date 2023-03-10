@@ -23,7 +23,7 @@ module.exports = function (ctx) {
                     console.log('* In the root build.gradle file (under /platforms/android) add:');
                     console.log("buildscript {");
                     console.log("    dependencies {");
-                    console.log("         classpath 'com.google.gms:google-services:3.2.0'  // <-- add this line");
+                    console.log("         classpath 'com.google.gms:google-services:x.y.z'  // <-- add this line, and replace x.y.z with the latest version of the package");
                     console.log("    }");
                     console.log("}");
                     console.log("**** That's it, you should be able to use the plugin now! ****");

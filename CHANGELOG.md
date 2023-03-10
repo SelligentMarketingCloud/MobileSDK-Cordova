@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0] - 10 March 2023
+
+### Changed
+- Add version 4.0.3 of the Android SDK to `src/android/frameworks`
+- Change used native SDK version number to `4.0.3` for Android in README
+- Change the version number of the google-services classpath doc entry to `x.y.z` to reflect that the user should keep it up to date, and add appropriate comment about this fact
+
 ## [3.0.0] - 7 December 2022
 
 ### Added

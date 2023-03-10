@@ -11,7 +11,7 @@ This module uses the native Selligent SDKs:
 
 | SDK                                                                     | Version |
 | ----------------------------------------------------------------------- | ------- |
-| [Android](https://github.com/SelligentMarketingCloud/MobileSDK-Android) | 4.0.1   |
+| [Android](https://github.com/SelligentMarketingCloud/MobileSDK-Android) | 4.0.3   |
 | [iOS](https://github.com/SelligentMarketingCloud/MobileSDK-iOS)         | 2.7.7   |
 
 ## Installation
@@ -80,7 +80,7 @@ buildscript {
 ...
     dependencies {
   ...
-        classpath 'com.google.gms:google-services:3.2.0'
+        classpath 'com.google.gms:google-services:x.y.z' // Replace the x.y.z with the latest version of the package (latest tested = 4.3.15)
         ...
     }
     ...
